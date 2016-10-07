@@ -58,7 +58,7 @@ def cnn_max_elu(lmdb, batch_size, mean):
     # n.pool = L.Pooling(n.elu7, global_pooling=True, pool=P.Pooling.AVE)
     # n.flatten = L.Flatten(n.pool)
     # n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
-    n.loss = L.SoftmaxWithLoss(n.elu7, n.label)
+    n.loss = L.HingeLoss(n.elu7, n.label, norm='L2')
 
     return n.to_proto()
 
@@ -112,7 +112,7 @@ def cnn_max_relu(lmdb, batch_size, mean):
     # n.pool = L.Pooling(n.relu7, global_pooling=True, pool=P.Pooling.AVE)
     # n.flatten = L.Flatten(n.pool)
     # n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
-    n.loss = L.SoftmaxWithLoss(n.relu7, n.label)
+    n.loss = L.HingeLoss(n.relu7, n.label, norm='L2')
 
     return n.to_proto()
 
@@ -166,7 +166,7 @@ def cnn_max_leakyrelu(lmdb, batch_size, mean):
     # n.pool = L.Pooling(n.relu7, global_pooling=True, pool=P.Pooling.AVE)
     # n.flatten = L.Flatten(n.pool)
     # n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
-    n.loss = L.SoftmaxWithLoss(n.relu7, n.label)
+    n.loss = L.HingeLoss(n.relu7, n.label, norm='L2')
 
     return n.to_proto()
 
@@ -220,7 +220,7 @@ def cnn_max_sig(lmdb, batch_size, mean):
     # n.pool = L.Pooling(n.sig7, global_pooling=True, pool=P.Pooling.AVE)
     # n.flatten = L.Flatten(n.pool)
     # n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
-    n.loss = L.SoftmaxWithLoss(n.sig7, n.label)
+    n.loss = L.HingeLoss(n.sig7, n.label, norm='L2')
 
     return n.to_proto()
 
@@ -275,7 +275,7 @@ def cnn_max_tanh(lmdb, batch_size, mean):
     # n.pool = L.Pooling(n.tanh7, global_pooling=True, pool=P.Pooling.AVE)
     # n.flatten = L.Flatten(n.pool)
     # n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
-    n.loss = L.SoftmaxWithLoss(n.tanh7, n.label)
+    n.loss = L.HingeLoss(n.tanh7, n.label, norm='L2')
 
     return n.to_proto()
 
@@ -319,17 +319,17 @@ def cnn_max_absval(lmdb, batch_size, mean):
     n.conv10 = L.Convolution(n.absval5, kernel_size=1, num_output=300, weight_filler=dict(type='xavier'))
     n.pool6 = L.Pooling(n.conv10, kernel_size=2, stride=2, pool=P.Pooling.MAX)
     n.drop6 = L.Dropout(n.pool6, dropout_ratio=0.5)
-    n.absval6 = L.TanH(n.drop6)
+    n.absval6 = L.AbsVal(n.drop6)
     # seventh stack
     n.conv11 = L.Convolution(n.absval6, kernel_size=1, num_output=100, weight_filler=dict(type='xavier'))
     n.pool7 = L.Pooling(n.conv11, kernel_size=2, stride=2, pool=P.Pooling.MAX)
     n.drop7 = L.Dropout(n.pool7, dropout_ratio=0.0)
-    n.absval7 = L.TanH(n.drop7)
+    n.absval7 = L.AbsVal(n.drop7)
 
     # n.pool = L.Pooling(n.absval7, global_pooling=True, pool=P.Pooling.AVE)
     # n.flatten = L.Flatten(n.pool)
     # n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
-    n.loss = L.SoftmaxWithLoss(n.absval7, n.label)
+    n.loss = L.HingeLoss(n.absval7, n.label, norm='L2')
 
     return n.to_proto()
 
@@ -384,7 +384,7 @@ def cnn_max_power(lmdb, batch_size, mean):
     # n.pool = L.Pooling(n.power7, global_pooling=True, pool=P.Pooling.AVE)
     # n.flatten = L.Flatten(n.pool)
     # n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
-    n.loss = L.SoftmaxWithLoss(n.power7, n.label)
+    n.loss = L.HingeLoss(n.power7, n.label, norm='L2')
 
     return n.to_proto()
 
@@ -438,13 +438,9 @@ def cnn_max_bnll(lmdb, batch_size, mean):
     # n.pool = L.Pooling(n.bnll7, global_pooling=True, pool=P.Pooling.AVE)
     # n.flatten = L.Flatten(n.pool)
     # n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
-    n.loss = L.SoftmaxWithLoss(n.bnll7, n.label)
+    n.loss = L.HingeLoss(n.bnll7, n.label, norm='L2')
 
     return n.to_proto()
-
-
-
-
 
 
 
