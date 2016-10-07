@@ -455,6 +455,6 @@ caffe.set_mode_gpu()
 
 ### load the solver and create train and test nets
 solver = None
-solver = caffe.SGDSolver('cifar-10_elu_solver.prototxt')
+solver = caffe.SGDSolver('cifar-10_solver_SGD.prototxt')
 
 solver.solve()
