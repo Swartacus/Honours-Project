@@ -248,6 +248,40 @@ def allcnn_power(lmdb, batch_size, mean):
 
     return n.to_proto()
 
+def allcnn_bnll(lmdb, batch_size, mean):
+    '''
+    Creates an all-CNN
+    '''
+    n = caffe.NetSpec()
+
+    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb,transform_param=dict(mean_file=mean), ntop=2)
+
+    n.conv1 = L.Convolution(n.data, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
+    n.bnll1 = L.BNLL(n.conv1, power=1, scale=1, shift=0, in_place=True)
+    n.conv2 = L.Convolution(n.bnll1, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
+    n.bnll2 = L.BNLL(n.conv2, power=1, scale=1, shift=0,  in_place=True)
+    n.conv3 = L.Convolution(n.bnll2, kernel_size=3, num_output=96, stride=2, weight_filler=dict(type='xavier'))
+    n.bnll3 = L.BNLL(n.conv3, power=1, scale=1, shift=0,  in_place=True)
+    n.conv4 = L.Convolution(n.bnll3, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
+    n.bnll4 = L.BNLL(n.conv4, power=1, scale=1, shift=0,  in_place=True)
+    n.conv5 = L.Convolution(n.bnll4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
+    n.bnll5 = L.BNLL(n.conv5, power=1, scale=1, shift=0,  in_place=True)
+    n.conv6 = L.Convolution(n.conv5, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
+    n.bnll6 = L.BNLL(n.conv6, power=1, scale=1, shift=0,  in_place=True)
+    n.conv7 = L.Convolution(n.bnll6, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
+    n.bnll7 = L.BNLL(n.conv7, power=1, scale=1, shift=0,  in_place=True)
+    n.conv8 = L.Convolution(n.bnll7, kernel_size=1, num_output=192, weight_filler=dict(type='xavier'))
+    n.bnll8 = L.BNLL(n.conv8, power=1, scale=1, shift=0,  in_place=True)
+    n.conv9 = L.Convolution(n.bnll8, kernel_size=1, num_output=10, weight_filler=dict(type='xavier'))
+    n.bnll9 = L.BNLL(n.conv9, power=1, scale=1, shift=0,  in_place=True)
+
+    n.pool = L.Pooling(n..bnll9, global_pooling=True, pool=P.Pooling.AVE)
+    n.flatten = L.Flatten(n.pool)
+    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
+    n.loss = L.SoftmaxWithLoss(n.score, n.label)
+
+    return n.to_proto()
+
 
 
 with open('all_cnn_train.prototxt','w') as f:
