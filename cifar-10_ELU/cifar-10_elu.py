@@ -40,8 +40,8 @@ def allcnn(lmdb, batch_size, mean):
     n.elu4 = L.ELU(n.drop4)
     # fifth stack
     n.conv8 = L.Convolution(n.elu4, kernel_size=1, num_output=280, weight_filler=dict(type='xavier'))
-    n.conv9 = L.Convolution(n.conv8, kernel_size=2, num_output=300, weight_filler=dict(type='xavier'))
-    n.pool5 = L.Pooling(n.conv9, kernel_size=2, stride=2, pool=P.Pooling.MAX)
+    #n.conv9 = L.Convolution(n.conv8, kernel_size=2, num_output=300, weight_filler=dict(type='xavier'))
+    n.pool5 = L.Pooling(n.conv6, kernel_size=2, stride=2, pool=P.Pooling.MAX)
     n.drop5 = L.Dropout(n.pool5, dropout_ratio=0.4)
     n.elu5 = L.ELU(n.drop5)
     # sixth stack
@@ -63,10 +63,10 @@ def allcnn(lmdb, batch_size, mean):
     return n.to_proto()
 
 with open('elu_cnn_train.prototxt','w') as f:
-    f.write(str(allcnn('cifar10_train_lmdb', 64, 'mean.binaryproto')))
+    f.write(str(allcnn('../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
 
 with open('elu_cnn_test.prototxt','w') as f:
-    f.write(str(allcnn('cifar10_test_lmdb', 64, 'mean.binaryproto')))
+    f.write(str(allcnn('../../data/cifar-10/cifar10_test_lmdb', 64, 'mean.binaryproto')))
 
 caffe.set_device(0)
 caffe.set_mode_gpu()

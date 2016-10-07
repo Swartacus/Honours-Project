@@ -40,7 +40,7 @@ def allcnn(sname, batch_size):
     n.elu4 = L.ELU(n.drop4, in_place=True)
     # fifth stack
     n.conv8 = L.Convolution(n.elu4, kernel_size=1, num_output=280, weight_filler=dict(type='xavier'))
-    n.conv9 = L.Convolution(n.conv8, kernel_size=2, num_output=300, weight_filler=dict(type='xavier'))
+    #n.conv9 = L.Convolution(n.conv8, kernel_size=2, num_output=300, weight_filler=dict(type='xavier'))
     n.pool5 = L.Pooling(n.conv8, kernel_size=2, stride=2, pool=P.Pooling.MAX)
     n.drop5 = L.Dropout(n.pool5, dropout_ratio=0.4)
     n.elu5 = L.ELU(n.drop5, in_place=True)
@@ -63,10 +63,10 @@ def allcnn(sname, batch_size):
     return n.to_proto()
 
 with open('elu_cnn_train.prototxt','w') as f:
-    f.write(str(allcnn('cifar_100_caffe_hdf5/train.txt', 100)))
+    f.write(str(allcnn('../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 100)))
 
 with open('elu_cnn_test.prototxt','w') as f:
-    f.write(str(allcnn('cifar_100_caffe_hdf5/test.txt', 100)))
+    f.write(str(allcnn('../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
 
 caffe.set_device(0)
 caffe.set_mode_gpu()

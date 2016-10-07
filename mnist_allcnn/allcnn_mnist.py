@@ -43,10 +43,10 @@ def allcnn(lmdb, batch_size):
     return n.to_proto()
 
 with open('all_cnn_train.prototxt','w') as f:
-    f.write(str(allcnn('mnist_train_lmdb', 100)))
+    f.write(str(allcnn('../../data/mnist/mnist_train_lmdb', 100)))
 
 with open('all_cnn_test.prototxt','w') as f:
-    f.write(str(allcnn('mnist_test_lmdb', 100)))
+    f.write(str(allcnn('../../data/mnist/mnist_test_lmdb', 100)))
 
 caffe.set_device(0)
 caffe.set_mode_gpu()

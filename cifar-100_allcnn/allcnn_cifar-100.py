@@ -42,10 +42,10 @@ def allcnn(sname, batch_size):
     return n.to_proto()
 
 with open('all_cnn_train.prototxt','w') as f:
-    f.write(str(allcnn('cifar_100_caffe_hdf5/train.txt', 100)))
+    f.write(str(allcnn('../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 100)))
 
 with open('all_cnn_test.prototxt','w') as f:
-    f.write(str(allcnn('cifar_100_caffe_hdf5/test.txt', 100)))
+    f.write(str(allcnn('../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
 
 caffe.set_device(0)
 caffe.set_mode_gpu()

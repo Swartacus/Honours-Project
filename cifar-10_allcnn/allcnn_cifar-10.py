@@ -64,10 +64,10 @@ def allcnn(lmdb, batch_size, mean):
     return n.to_proto()
 
 with open('all_cnn_train.prototxt','w') as f:
-    f.write(str(allcnn('cifar10_train_lmdb', 100, 'mean.binaryproto')))
+    f.write(str(allcnn('../../data/cifar-10/cifar10_train_lmdb', 100, 'mean.binaryproto')))
 
 with open('all_cnn_test.prototxt','w') as f:
-    f.write(str(allcnn('cifar10_test_lmdb', 100, 'mean.binaryproto')))
+    f.write(str(allcnn('../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
 
 caffe.set_device(0)
 caffe.set_mode_gpu()
