@@ -8,7 +8,7 @@ sys.path.insert(0, caffe_root + 'python')
 import caffe
 from caffe import layers as L, params as P
 
-def cnn_max_elu(lmdb, batch_size, mean):
+def cnn_ave_elu(lmdb, batch_size, mean):
     '''
     Creates a CNN that uses ELUs
     '''
@@ -62,7 +62,7 @@ def cnn_max_elu(lmdb, batch_size, mean):
 
     return n.to_proto()
 
-def cnn_max_relu(lmdb, batch_size, mean):
+def cnn_ave_relu(lmdb, batch_size, mean):
     '''
     Creates a CNN that uses ReLUs
     '''
@@ -116,7 +116,7 @@ def cnn_max_relu(lmdb, batch_size, mean):
 
     return n.to_proto()
 
-def cnn_max_leakyrelu(lmdb, batch_size, mean):
+def cnn_ave_leakyrelu(lmdb, batch_size, mean):
     '''
     Creates a CNN that uses LeakyReLUs
     '''
@@ -170,7 +170,7 @@ def cnn_max_leakyrelu(lmdb, batch_size, mean):
 
     return n.to_proto()
 
-def cnn_max_sig(lmdb, batch_size, mean):
+def cnn_ave_sig(lmdb, batch_size, mean):
     '''
     Creates a CNN that uses Sigmoids
     '''
@@ -225,7 +225,7 @@ def cnn_max_sig(lmdb, batch_size, mean):
     return n.to_proto()
 
 
-def cnn_max_tanh(lmdb, batch_size, mean):
+def cnn_ave_tanh(lmdb, batch_size, mean):
     '''
     Creates a CNN that uses TanH activations
     '''
@@ -279,7 +279,7 @@ def cnn_max_tanh(lmdb, batch_size, mean):
 
     return n.to_proto()
 
-def cnn_max_absval(lmdb, batch_size, mean):
+def cnn_ave_absval(lmdb, batch_size, mean):
     '''
     Creates a CNN that uses Absolute Value activations
     '''
@@ -334,7 +334,7 @@ def cnn_max_absval(lmdb, batch_size, mean):
     return n.to_proto()
 
 
-def cnn_max_power(lmdb, batch_size, mean):
+def cnn_ave_power(lmdb, batch_size, mean):
     '''
     Creates a CNN that uses Powers
     '''
@@ -388,7 +388,7 @@ def cnn_max_power(lmdb, batch_size, mean):
 
     return n.to_proto()
 
-def cnn_max_bnll(lmdb, batch_size, mean):
+def cnn_ave_bnll(lmdb, batch_size, mean):
     '''
     Creates a CNN that uses BNLL activations
     '''
@@ -444,11 +444,11 @@ def cnn_max_bnll(lmdb, batch_size, mean):
 
 
 
-with open('cnn_max_relu_train.prototxt','w') as f:
-    f.write(str(cnn_max_relu('../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+with open('cnn_ave_relu_train.prototxt','w') as f:
+    f.write(str(cnn_ave_relu('../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
 
-with open('cnn_max_relu_test.prototxt','w') as f:
-    f.write(str(cnn_max_relu('../../data/cifar-10/cifar10_test_lmdb', 64, 'mean.binaryproto')))
+with open('cnn_ave_relu_test.prototxt','w') as f:
+    f.write(str(cnn_ave_relu('../../data/cifar-10/cifar10_test_lmdb', 64, 'mean.binaryproto')))
 
 caffe.set_device(0)
 caffe.set_mode_gpu()

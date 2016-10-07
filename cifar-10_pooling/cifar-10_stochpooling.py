@@ -8,7 +8,7 @@ sys.path.insert(0, caffe_root + 'python')
 import caffe
 from caffe import layers as L, params as P
 
-def cnn_max_elu(lmdb, batch_size, mean):
+def cnn_stoch_elu(lmdb, batch_size, mean):
     '''
     Creates a CNN that uses ELUs
     '''
@@ -41,7 +41,7 @@ def cnn_max_elu(lmdb, batch_size, mean):
     # fifth stack
     n.conv8 = L.Convolution(n.elu4, kernel_size=1, num_output=280, weight_filler=dict(type='xavier'))
     #n.conv9 = L.Convolution(n.conv8, kernel_size=2, num_output=300, weight_filler=dict(type='xavier'))
-    n.pool5 = L.Pooling(n.conv6, kernel_size=2, stride=2, pool=P.Pooling.STOCHASTIC)
+    n.pool5 = L.Pooling(n.conv8, kernel_size=2, stride=2, pool=P.Pooling.STOCHASTIC)
     n.drop5 = L.Dropout(n.pool5, dropout_ratio=0.4)
     n.elu5 = L.ELU(n.drop5)
     # sixth stack
@@ -62,7 +62,7 @@ def cnn_max_elu(lmdb, batch_size, mean):
 
     return n.to_proto()
 
-def cnn_max_relu(lmdb, batch_size, mean):
+def cnn_stoch_relu(lmdb, batch_size, mean):
     '''
     Creates a CNN that uses ReLUs
     '''
@@ -95,7 +95,7 @@ def cnn_max_relu(lmdb, batch_size, mean):
     # fifth stack
     n.conv8 = L.Convolution(n.relu4, kernel_size=1, num_output=280, weight_filler=dict(type='xavier'))
     #n.conv9 = L.Convolution(n.conv8, kernel_size=2, num_output=300, weight_filler=dict(type='xavier'))
-    n.pool5 = L.Pooling(n.conv6, kernel_size=2, stride=2, pool=P.Pooling.STOCHASTIC)
+    n.pool5 = L.Pooling(n.conv8, kernel_size=2, stride=2, pool=P.Pooling.STOCHASTIC)
     n.drop5 = L.Dropout(n.pool5, dropout_ratio=0.4)
     n.relu5 = L.ReLU(n.drop5)
     # sixth stack
@@ -116,7 +116,7 @@ def cnn_max_relu(lmdb, batch_size, mean):
 
     return n.to_proto()
 
-def cnn_max_leakyrelu(lmdb, batch_size, mean):
+def cnn_stoch_leakyrelu(lmdb, batch_size, mean):
     '''
     Creates a CNN that uses LeakyReLUs
     '''
@@ -149,7 +149,7 @@ def cnn_max_leakyrelu(lmdb, batch_size, mean):
     # fifth stack
     n.conv8 = L.Convolution(n.relu4, kernel_size=1, num_output=280, weight_filler=dict(type='xavier'))
     #n.conv9 = L.Convolution(n.conv8, kernel_size=2, num_output=300, weight_filler=dict(type='xavier'))
-    n.pool5 = L.Pooling(n.conv6, kernel_size=2, stride=2, pool=P.Pooling.STOCHASTIC)
+    n.pool5 = L.Pooling(n.conv8, kernel_size=2, stride=2, pool=P.Pooling.STOCHASTIC)
     n.drop5 = L.Dropout(n.pool5, dropout_ratio=0.4)
     n.relu5 = L.ReLU(n.drop5, neagtive_slope=0.01)
     # sixth stack
@@ -170,7 +170,7 @@ def cnn_max_leakyrelu(lmdb, batch_size, mean):
 
     return n.to_proto()
 
-def cnn_max_sig(lmdb, batch_size, mean):
+def cnn_stoch_sig(lmdb, batch_size, mean):
     '''
     Creates a CNN that uses Sigmoids
     '''
@@ -203,7 +203,7 @@ def cnn_max_sig(lmdb, batch_size, mean):
     # fifth stack
     n.conv8 = L.Convolution(n.sig4, kernel_size=1, num_output=280, weight_filler=dict(type='xavier'))
     #n.conv9 = L.Convolution(n.conv8, kernel_size=2, num_output=300, weight_filler=dict(type='xavier'))
-    n.pool5 = L.Pooling(n.conv6, kernel_size=2, stride=2, pool=P.Pooling.STOCHASTIC)
+    n.pool5 = L.Pooling(n.conv8, kernel_size=2, stride=2, pool=P.Pooling.STOCHASTIC)
     n.drop5 = L.Dropout(n.pool5, dropout_ratio=0.4)
     n.sig5 = L.Sigmoid(n.drop5)
     # sixth stack
@@ -225,7 +225,7 @@ def cnn_max_sig(lmdb, batch_size, mean):
     return n.to_proto()
 
 
-def cnn_max_tanh(lmdb, batch_size, mean):
+def cnn_stoch_tanh(lmdb, batch_size, mean):
     '''
     Creates a CNN that uses TanH activations
     '''
@@ -258,7 +258,7 @@ def cnn_max_tanh(lmdb, batch_size, mean):
     # fifth stack
     n.conv8 = L.Convolution(n.tanh4, kernel_size=1, num_output=280, weight_filler=dict(type='xavier'))
     #n.conv9 = L.Convolution(n.conv8, kernel_size=2, num_output=300, weight_filler=dict(type='xavier'))
-    n.pool5 = L.Pooling(n.conv6, kernel_size=2, stride=2, pool=P.Pooling.STOCHASTIC)
+    n.pool5 = L.Pooling(n.conv8, kernel_size=2, stride=2, pool=P.Pooling.STOCHASTIC)
     n.drop5 = L.Dropout(n.pool5, dropout_ratio=0.4)
     n.tanh5 = L.TanH(n.drop5)
     # sixth stack
@@ -279,7 +279,7 @@ def cnn_max_tanh(lmdb, batch_size, mean):
 
     return n.to_proto()
 
-def cnn_max_absval(lmdb, batch_size, mean):
+def cnn_stoch_absval(lmdb, batch_size, mean):
     '''
     Creates a CNN that uses Absolute Value activations
     '''
@@ -312,7 +312,7 @@ def cnn_max_absval(lmdb, batch_size, mean):
     # fifth stack
     n.conv8 = L.Convolution(n.absval4, kernel_size=1, num_output=280, weight_filler=dict(type='xavier'))
     #n.conv9 = L.Convolution(n.conv8, kernel_size=2, num_output=300, weight_filler=dict(type='xavier'))
-    n.pool5 = L.Pooling(n.conv6, kernel_size=2, stride=2, pool=P.Pooling.STOCHASTIC)
+    n.pool5 = L.Pooling(n.conv8, kernel_size=2, stride=2, pool=P.Pooling.STOCHASTIC)
     n.drop5 = L.Dropout(n.pool5, dropout_ratio=0.4)
     n.absval5 = L.AbsVal(n.drop5)
     # sixth stack
@@ -334,7 +334,7 @@ def cnn_max_absval(lmdb, batch_size, mean):
     return n.to_proto()
 
 
-def cnn_max_power(lmdb, batch_size, mean):
+def cnn_stoch_power(lmdb, batch_size, mean):
     '''
     Creates a CNN that uses Powers
     '''
@@ -367,7 +367,7 @@ def cnn_max_power(lmdb, batch_size, mean):
     # fifth stack
     n.conv8 = L.Convolution(n.power4, kernel_size=1, num_output=280, weight_filler=dict(type='xavier'))
     #n.conv9 = L.Convolution(n.conv8, kernel_size=2, num_output=300, weight_filler=dict(type='xavier'))
-    n.pool5 = L.Pooling(n.conv6, kernel_size=2, stride=2, pool=P.Pooling.STOCHASTIC)
+    n.pool5 = L.Pooling(n.conv8, kernel_size=2, stride=2, pool=P.Pooling.STOCHASTIC)
     n.drop5 = L.Dropout(n.pool5, dropout_ratio=0.4)
     n.power5 = L.Power(n.drop5)
     # sixth stack
@@ -388,7 +388,7 @@ def cnn_max_power(lmdb, batch_size, mean):
 
     return n.to_proto()
 
-def cnn_max_bnll(lmdb, batch_size, mean):
+def cnn_stoch_bnll(lmdb, batch_size, mean):
     '''
     Creates a CNN that uses BNLL activations
     '''
@@ -421,7 +421,7 @@ def cnn_max_bnll(lmdb, batch_size, mean):
     # fifth stack
     n.conv8 = L.Convolution(n.bnll4, kernel_size=1, num_output=280, weight_filler=dict(type='xavier'))
     #n.conv9 = L.Convolution(n.conv8, kernel_size=2, num_output=300, weight_filler=dict(type='xavier'))
-    n.pool5 = L.Pooling(n.conv6, kernel_size=2, stride=2, pool=P.Pooling.STOCHASTIC)
+    n.pool5 = L.Pooling(n.conv8, kernel_size=2, stride=2, pool=P.Pooling.STOCHASTIC)
     n.drop5 = L.Dropout(n.pool5, dropout_ratio=0.4)
     n.bnll5 = L.BNLL(n.drop5)
     # sixth stack
@@ -444,11 +444,11 @@ def cnn_max_bnll(lmdb, batch_size, mean):
 
 
 
-with open('cnn_max_relu_train.prototxt','w') as f:
-    f.write(str(cnn_max_relu('../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+with open('cnn_stoch_relu_train.prototxt','w') as f:
+    f.write(str(cnn_stoch_relu('../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
 
-with open('cnn_max_relu_test.prototxt','w') as f:
-    f.write(str(cnn_max_relu('../../data/cifar-10/cifar10_test_lmdb', 64, 'mean.binaryproto')))
+with open('cnn_stoch_relu_test.prototxt','w') as f:
+    f.write(str(cnn_stoch_relu('../../data/cifar-10/cifar10_test_lmdb', 64, 'mean.binaryproto')))
 
 caffe.set_device(0)
 caffe.set_mode_gpu()
