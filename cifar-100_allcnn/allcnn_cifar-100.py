@@ -36,7 +36,7 @@ def allcnn(sname, batch_size):
     n.relu9 = L.ReLU(n.conv9, in_place=True)
     n.pool = L.Pooling(n.relu9, global_pooling=True, pool=P.Pooling.AVE)
     n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
+    n.score = L.InnerProduct(n.flatten, num_output=100, weight_filler=dict(type='gaussian'))
     n.loss = L.SoftmaxWithLoss(n.score, n.label_fine)
 
     return n.to_proto()
