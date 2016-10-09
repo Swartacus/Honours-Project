@@ -37,8 +37,9 @@ def allcnn_relu(lmdb, batch_size, mean):
     n.relu9 = L.ReLU(n.conv9, in_place=True)
 
     n.pool = L.Pooling(n.relu9, global_pooling=True, pool=P.Pooling.AVE)
-    n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
+#    n.flatten = L.Flatten(n.pool)
+    n.score = L.InnerProduct(n.pool, num_output=10, weight_filler=dict(type='gaussian'))
+    n.accuracy = L.Accuracy(n.score, n.label)
     n.loss = L.SoftmaxWithLoss(n.score, n.label)
 
     return n.to_proto()
@@ -72,8 +73,9 @@ def allcnn_elu(lmdb, batch_size, mean):
     n.elu9 = L.ELU(n.conv9, in_place=True)
 
     n.pool = L.Pooling(n.elu9, global_pooling=True, pool=P.Pooling.AVE)
-    n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
+#    n.flatten = L.Flatten(n.pool)
+    n.score = L.InnerProduct(n.pool, num_output=10, weight_filler=dict(type='gaussian'))
+    n.accuracy = L.Accuracy(n.score, n.label)
     n.loss = L.SoftmaxWithLoss(n.score, n.label)
 
     return n.to_proto()
@@ -106,8 +108,9 @@ def allcnn_leakyrelu(lmdb, batch_size, mean):
     n.relu9 = L.ReLU(n.conv9, negative_slope=0.01, in_place=True)
 
     n.pool = L.Pooling(n.relu9, global_pooling=True, pool=P.Pooling.AVE)
-    n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
+#    n.flatten = L.Flatten(n.pool)
+    n.score = L.InnerProduct(n.pool, num_output=10, weight_filler=dict(type='gaussian'))
+    n.accuracy = L.Accuracy(n.score, n.label)
     n.loss = L.SoftmaxWithLoss(n.score, n.label)
 
     return n.to_proto()
@@ -140,8 +143,9 @@ def allcnn_sigmoid(lmdb, batch_size, mean):
     n.sig9 = L.Sigmoid(n.conv9,  in_place=True)
 
     n.pool = L.Pooling(n.sig9, global_pooling=True, pool=P.Pooling.AVE)
-    n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
+#    n.flatten = L.Flatten(n.pool)
+    n.score = L.InnerProduct(n.pool, num_output=10, weight_filler=dict(type='gaussian'))
+    n.accuracy = L.Accuracy(n.score, n.label)
     n.loss = L.SoftmaxWithLoss(n.score, n.label)
 
     return n.to_proto()
@@ -174,8 +178,9 @@ def allcnn_tanh(lmdb, batch_size, mean):
     n.tanh9 = L.TanH(n.conv9,  in_place=True)
 
     n.pool = L.Pooling(n.tanh9, global_pooling=True, pool=P.Pooling.AVE)
-    n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
+#    n.flatten = L.Flatten(n.pool)
+    n.score = L.InnerProduct(n.pool, num_output=10, weight_filler=dict(type='gaussian'))
+    n.accuracy = L.Accuracy(n.score, n.label)
     n.loss = L.SoftmaxWithLoss(n.score, n.label)
 
     return n.to_proto()
@@ -208,8 +213,9 @@ def allcnn_absval(lmdb, batch_size, mean):
     n.absval9 = L.AbsVal(n.conv9,  in_place=True)
 
     n.pool = L.Pooling(n.absval9, global_pooling=True, pool=P.Pooling.AVE)
-    n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
+#    n.flatten = L.Flatten(n.pool)
+    n.score = L.InnerProduct(n.pool, num_output=10, weight_filler=dict(type='gaussian'))
+    n.accuracy = L.Accuracy(n.score, n.label)
     n.loss = L.SoftmaxWithLoss(n.score, n.label)
 
     return n.to_proto()
@@ -242,8 +248,9 @@ def allcnn_power(lmdb, batch_size, mean):
     n.power9 = L.Power(n.conv9, power=1, scale=1, shift=0,  in_place=True)
 
     n.pool = L.Pooling(n.power9, global_pooling=True, pool=P.Pooling.AVE)
-    n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
+#    n.flatten = L.Flatten(n.pool)
+    n.score = L.InnerProduct(n.pool, num_output=10, weight_filler=dict(type='gaussian'))
+    n.accuracy = L.Accuracy(n.score, n.label)
     n.loss = L.SoftmaxWithLoss(n.score, n.label)
 
     return n.to_proto()
@@ -276,8 +283,9 @@ def allcnn_bnll(lmdb, batch_size, mean):
     n.bnll9 = L.BNLL(n.conv9,  in_place=True)
 
     n.pool = L.Pooling(n.bnll9, global_pooling=True, pool=P.Pooling.AVE)
-    n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
+#    n.flatten = L.Flatten(n.pool)
+    n.score = L.InnerProduct(n.pool, num_output=10, weight_filler=dict(type='gaussian'))
+    n.accuracy = L.Accuracy(n.score, n.label)
     n.loss = L.SoftmaxWithLoss(n.score, n.label)
 
     return n.to_proto()
