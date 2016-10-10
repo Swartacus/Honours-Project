@@ -96,9 +96,9 @@ for n in nets:
     for s in solvers:
         s.train_net = path + '/{0}/allcnn_{0}_train.prototxt'.format(n)
         s.test_net.append(path + '/{0}/allcnn_{0}_test.prototxt'.format(n))
-        s.test_interval = 250
+        s.test_interval = 100
         s.test_iter.append(100)
-        s.max_iter = 2500
+        s.max_iter = 100000
         s.base_lr = 0.0001
         if (s.type != 'AdaGrad') and (s.type != 'Adam') and (s.type != 'RMSProp'):
             s.momentum = 0.9
