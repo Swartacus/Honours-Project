@@ -16,19 +16,29 @@ def allcnn_relu(lmdb, batch_size, mean):
     n = caffe.NetSpec()
 
     n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb,transform_param=dict(mean_file=mean), ntop=2)
-
+    # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
     n.relu1 = L.ReLU(n.conv1, in_place=True)
     n.conv2 = L.Convolution(n.relu1, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
-    n.relu2 = L.ReLU(n.conv2, in_place=True)
-    n.conv3 = L.Convolution(n.relu2, kernel_size=3, num_output=96, stride=2, weight_filler=dict(type='xavier'))
+    n.bn1 = L.BatchNorm(n.conv2)
+    n.relu2 = L.ReLU(n.bn1, in_place=True)
+    n.drop1 = L.Dropout(n.relu2, dropout_ratio=0.5)
+    # Convolution replaces pooling
+    n.conv3 = L.Convolution(n.drop1, kernel_size=3, num_output=96, stride=2, weight_filler=dict(type='xavier'))
     n.relu3 = L.ReLU(n.conv3, in_place=True)
+
+    # second stack
     n.conv4 = L.Convolution(n.relu3, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
     n.relu4 = L.ReLU(n.conv4, in_place=True)
     n.conv5 = L.Convolution(n.relu4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
-    n.relu5 = L.ReLU(n.conv5, in_place=True)
-    n.conv6 = L.Convolution(n.conv5, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
+    n.bn2 = L.BatchNorm(n.conv5)
+    n.relu5 = L.ReLU(n.bn2, in_place=True)
+    n.drop4 = L.Dropout(n.relu5, dropout_ratio=0.5)
+    # Convolution replaces pooling
+    n.conv6 = L.Convolution(n.drop4, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
     n.relu6 = L.ReLU(n.conv6, in_place=True)
+
+    # final stack and output
     n.conv7 = L.Convolution(n.relu6, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
     n.relu7 = L.ReLU(n.conv7, in_place=True)
     n.conv8 = L.Convolution(n.relu7, kernel_size=1, num_output=192, weight_filler=dict(type='xavier'))
@@ -37,8 +47,8 @@ def allcnn_relu(lmdb, batch_size, mean):
     n.relu9 = L.ReLU(n.conv9, in_place=True)
 
     n.pool = L.Pooling(n.relu9, global_pooling=True, pool=P.Pooling.AVE)
-#    n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.pool, num_output=10, weight_filler=dict(type='gaussian'))
+    n.flatten = L.Flatten(n.pool)
+    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
     n.accuracy = L.Accuracy(n.score, n.label)
     n.loss = L.SoftmaxWithLoss(n.score, n.label)
 
