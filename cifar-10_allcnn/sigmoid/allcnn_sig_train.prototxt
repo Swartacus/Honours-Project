@@ -45,15 +45,30 @@ layer {
   }
 }
 layer {
+  name: "bn1"
+  type: "BatchNorm"
+  bottom: "conv2"
+  top: "bn1"
+}
+layer {
   name: "sig2"
   type: "Sigmoid"
-  bottom: "conv2"
-  top: "conv2"
+  bottom: "bn1"
+  top: "bn1"
+}
+layer {
+  name: "drop1"
+  type: "Dropout"
+  bottom: "bn1"
+  top: "drop1"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
 }
 layer {
   name: "conv3"
   type: "Convolution"
-  bottom: "conv2"
+  bottom: "drop1"
   top: "conv3"
   convolution_param {
     num_output: 96
@@ -103,15 +118,30 @@ layer {
   }
 }
 layer {
+  name: "bn2"
+  type: "BatchNorm"
+  bottom: "conv5"
+  top: "bn2"
+}
+layer {
   name: "sig5"
   type: "Sigmoid"
-  bottom: "conv5"
-  top: "conv5"
+  bottom: "bn2"
+  top: "bn2"
+}
+layer {
+  name: "drop4"
+  type: "Dropout"
+  bottom: "bn2"
+  top: "drop4"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
 }
 layer {
   name: "conv6"
   type: "Convolution"
-  bottom: "conv5"
+  bottom: "drop4"
   top: "conv6"
   convolution_param {
     num_output: 192
@@ -196,9 +226,15 @@ layer {
   }
 }
 layer {
+  name: "flatten"
+  type: "Flatten"
+  bottom: "pool"
+  top: "flatten"
+}
+layer {
   name: "score"
   type: "InnerProduct"
-  bottom: "pool"
+  bottom: "flatten"
   top: "score"
   inner_product_param {
     num_output: 10

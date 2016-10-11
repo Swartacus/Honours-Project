@@ -94,11 +94,14 @@ path = os.path.dirname(os.path.abspath(__file__))
 nets = ['relu','leakyrelu','elu','sigmoid','tanh','absval','power','bnll']
 for n in nets:
     for s in solvers:
+        # s = None
         s.train_net = path + '/{0}/allcnn_{0}_train.prototxt'.format(n)
+        del s.test_net[:]
         s.test_net.append(path + '/{0}/allcnn_{0}_test.prototxt'.format(n))
-        s.test_interval = 100
+        s.test_interval = 150
+        del s.test_iter[:]
         s.test_iter.append(100)
-        s.max_iter = 100000
+        s.max_iter = 15000
         s.base_lr = 0.0001
         if (s.type != 'AdaGrad') and (s.type != 'Adam') and (s.type != 'RMSProp'):
             s.momentum = 0.9

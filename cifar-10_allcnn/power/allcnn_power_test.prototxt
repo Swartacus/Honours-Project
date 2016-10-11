@@ -30,11 +30,6 @@ layer {
   type: "Power"
   bottom: "conv1"
   top: "conv1"
-  power_param {
-    power: 1
-    scale: 1
-    shift: 0
-  }
 }
 layer {
   name: "conv2"
@@ -50,20 +45,30 @@ layer {
   }
 }
 layer {
+  name: "bn1"
+  type: "BatchNorm"
+  bottom: "conv2"
+  top: "bn1"
+}
+layer {
   name: "power2"
   type: "Power"
-  bottom: "conv2"
-  top: "conv2"
-  power_param {
-    power: 1
-    scale: 1
-    shift: 0
+  bottom: "bn1"
+  top: "bn1"
+}
+layer {
+  name: "drop1"
+  type: "Dropout"
+  bottom: "bn1"
+  top: "drop1"
+  dropout_param {
+    dropout_ratio: 0.5
   }
 }
 layer {
   name: "conv3"
   type: "Convolution"
-  bottom: "conv2"
+  bottom: "drop1"
   top: "conv3"
   convolution_param {
     num_output: 96
@@ -79,11 +84,6 @@ layer {
   type: "Power"
   bottom: "conv3"
   top: "conv3"
-  power_param {
-    power: 1
-    scale: 1
-    shift: 0
-  }
 }
 layer {
   name: "conv4"
@@ -103,11 +103,6 @@ layer {
   type: "Power"
   bottom: "conv4"
   top: "conv4"
-  power_param {
-    power: 1
-    scale: 1
-    shift: 0
-  }
 }
 layer {
   name: "conv5"
@@ -123,20 +118,30 @@ layer {
   }
 }
 layer {
+  name: "bn2"
+  type: "BatchNorm"
+  bottom: "conv5"
+  top: "bn2"
+}
+layer {
   name: "power5"
   type: "Power"
-  bottom: "conv5"
-  top: "conv5"
-  power_param {
-    power: 1
-    scale: 1
-    shift: 0
+  bottom: "bn2"
+  top: "bn2"
+}
+layer {
+  name: "drop4"
+  type: "Dropout"
+  bottom: "bn2"
+  top: "drop4"
+  dropout_param {
+    dropout_ratio: 0.5
   }
 }
 layer {
   name: "conv6"
   type: "Convolution"
-  bottom: "conv5"
+  bottom: "drop4"
   top: "conv6"
   convolution_param {
     num_output: 192
@@ -152,11 +157,6 @@ layer {
   type: "Power"
   bottom: "conv6"
   top: "conv6"
-  power_param {
-    power: 1
-    scale: 1
-    shift: 0
-  }
 }
 layer {
   name: "conv7"
@@ -176,11 +176,6 @@ layer {
   type: "Power"
   bottom: "conv7"
   top: "conv7"
-  power_param {
-    power: 1
-    scale: 1
-    shift: 0
-  }
 }
 layer {
   name: "conv8"
@@ -200,11 +195,6 @@ layer {
   type: "Power"
   bottom: "conv8"
   top: "conv8"
-  power_param {
-    power: 1
-    scale: 1
-    shift: 0
-  }
 }
 layer {
   name: "conv9"
@@ -224,11 +214,6 @@ layer {
   type: "Power"
   bottom: "conv9"
   top: "conv9"
-  power_param {
-    power: 1
-    scale: 1
-    shift: 0
-  }
 }
 layer {
   name: "pool"
@@ -241,9 +226,15 @@ layer {
   }
 }
 layer {
+  name: "flatten"
+  type: "Flatten"
+  bottom: "pool"
+  top: "flatten"
+}
+layer {
   name: "score"
   type: "InnerProduct"
-  bottom: "pool"
+  bottom: "flatten"
   top: "score"
   inner_product_param {
     num_output: 10
