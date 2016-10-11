@@ -98,7 +98,7 @@ for n in nets:
         s.test_net.append(path + '/{0}/allcnn_{0}_test.prototxt'.format(n))
         s.test_interval = 100
         s.test_iter.append(100)
-        s.max_iter = 100000
+        s.max_iter = 70000
         s.base_lr = 0.0001
         if (s.type != 'AdaGrad') and (s.type != 'Adam') and (s.type != 'RMSProp'):
             s.momentum = 0.9

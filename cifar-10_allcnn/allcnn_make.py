@@ -98,10 +98,10 @@ for n in nets:
         s.train_net = path + '/{0}/allcnn_{0}_train.prototxt'.format(n)
         del s.test_net[:]
         s.test_net.append(path + '/{0}/allcnn_{0}_test.prototxt'.format(n))
-        s.test_interval = 150
+        s.test_interval = 200
         del s.test_iter[:]
         s.test_iter.append(100)
-        s.max_iter = 15000
+        s.max_iter = 70000
         s.base_lr = 0.0001
         if (s.type != 'AdaGrad') and (s.type != 'Adam') and (s.type != 'RMSProp'):
             s.momentum = 0.9

@@ -23,15 +23,6 @@ layer {
   }
 }
 layer {
-  name: "relu1"
-  type: "ReLU"
-  bottom: "conv1"
-  top: "conv1"
-  relu_param {
-    negative_slope: 0.01
-  }
-}
-layer {
   name: "conv2"
   type: "Convolution"
   bottom: "conv1"
@@ -51,27 +42,9 @@ layer {
   top: "bn1"
 }
 layer {
-  name: "relu2"
-  type: "ReLU"
-  bottom: "bn1"
-  top: "bn1"
-  relu_param {
-    negative_slope: 0.01
-  }
-}
-layer {
-  name: "drop1"
-  type: "Dropout"
-  bottom: "bn1"
-  top: "drop1"
-  dropout_param {
-    dropout_ratio: 0.5
-  }
-}
-layer {
   name: "conv3"
   type: "Convolution"
-  bottom: "drop1"
+  bottom: "bn1"
   top: "conv3"
   convolution_param {
     num_output: 96
@@ -83,10 +56,19 @@ layer {
   }
 }
 layer {
+  name: "drop1"
+  type: "Dropout"
+  bottom: "conv3"
+  top: "drop1"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
   name: "relu3"
   type: "ReLU"
-  bottom: "conv3"
-  top: "conv3"
+  bottom: "drop1"
+  top: "drop1"
   relu_param {
     negative_slope: 0.01
   }
@@ -94,7 +76,7 @@ layer {
 layer {
   name: "conv4"
   type: "Convolution"
-  bottom: "conv3"
+  bottom: "drop1"
   top: "conv4"
   convolution_param {
     num_output: 192
@@ -102,15 +84,6 @@ layer {
     weight_filler {
       type: "xavier"
     }
-  }
-}
-layer {
-  name: "relu4"
-  type: "ReLU"
-  bottom: "conv4"
-  top: "conv4"
-  relu_param {
-    negative_slope: 0.01
   }
 }
 layer {
@@ -133,27 +106,9 @@ layer {
   top: "bn2"
 }
 layer {
-  name: "relu5"
-  type: "ReLU"
-  bottom: "bn2"
-  top: "bn2"
-  relu_param {
-    negative_slope: 0.01
-  }
-}
-layer {
-  name: "drop4"
-  type: "Dropout"
-  bottom: "bn2"
-  top: "drop4"
-  dropout_param {
-    dropout_ratio: 0.5
-  }
-}
-layer {
   name: "conv6"
   type: "Convolution"
-  bottom: "drop4"
+  bottom: "bn2"
   top: "conv6"
   convolution_param {
     num_output: 192
@@ -165,10 +120,19 @@ layer {
   }
 }
 layer {
+  name: "drop4"
+  type: "Dropout"
+  bottom: "conv6"
+  top: "drop4"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
   name: "relu6"
   type: "ReLU"
-  bottom: "conv6"
-  top: "conv6"
+  bottom: "drop4"
+  top: "drop4"
   relu_param {
     negative_slope: 0.01
   }
@@ -176,7 +140,7 @@ layer {
 layer {
   name: "conv7"
   type: "Convolution"
-  bottom: "conv6"
+  bottom: "drop4"
   top: "conv7"
   convolution_param {
     num_output: 192

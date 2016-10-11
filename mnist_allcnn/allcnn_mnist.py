@@ -18,25 +18,19 @@ def allcnn_relu(lmdb, batch_size):
     n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb,ntop=2)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
-    n.relu1 = L.ReLU(n.conv1, in_place=True)
-    n.conv2 = L.Convolution(n.relu1, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
+    n.conv2 = L.Convolution(n.conv1, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
     n.bn1 = L.BatchNorm(n.conv2)
-    n.relu2 = L.ReLU(n.bn1, in_place=True)
-    n.drop1 = L.Dropout(n.relu2, dropout_ratio=0.5)
-    # Convolution replaces pooling
-    n.conv3 = L.Convolution(n.drop1, kernel_size=3, num_output=96, stride=2, weight_filler=dict(type='xavier'))
-    n.relu3 = L.ReLU(n.conv3, in_place=True)
+    n.conv3 = L.Convolution(n.bn1, kernel_size=3, num_output=96, stride=2, weight_filler=dict(type='xavier'))
+    n.drop1 = L.Dropout(n.conv3, dropout_ratio=0.5)
+    n.relu3 = L.ReLU(n.drop1, in_place=True)
 
     # second stack
     n.conv4 = L.Convolution(n.relu3, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
-    n.relu4 = L.ReLU(n.conv4, in_place=True)
-    n.conv5 = L.Convolution(n.relu4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
+    n.conv5 = L.Convolution(n.conv4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
     n.bn2 = L.BatchNorm(n.conv5)
-    n.relu5 = L.ReLU(n.bn2, in_place=True)
-    n.drop4 = L.Dropout(n.relu5, dropout_ratio=0.5)
-    # Convolution replaces pooling
-    n.conv6 = L.Convolution(n.drop4, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
-    n.relu6 = L.ReLU(n.conv6, in_place=True)
+    n.conv6 = L.Convolution(n.bn2, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
+    n.drop4 = L.Dropout(n.conv6, dropout_ratio=0.5)
+    n.relu6 = L.ReLU(n.drop4, in_place=True)
 
     # final stack and output
     n.conv7 = L.Convolution(n.relu6, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
@@ -64,25 +58,19 @@ def allcnn_elu(lmdb, batch_size):
     n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb,ntop=2)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
-    n.elu1 = L.ELU(n.conv1, in_place=True)
-    n.conv2 = L.Convolution(n.elu1, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
+    n.conv2 = L.Convolution(n.conv1, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
     n.bn1 = L.BatchNorm(n.conv2)
-    n.elu2 = L.ELU(n.bn1, in_place=True)
-    n.drop1 = L.Dropout(n.elu2, dropout_ratio=0.5)
-    # Convolution replaces pooling
-    n.conv3 = L.Convolution(n.drop1, kernel_size=3, num_output=96, stride=2, weight_filler=dict(type='xavier'))
-    n.elu3 = L.ELU(n.conv3, in_place=True)
+    n.conv3 = L.Convolution(n.bn1, kernel_size=3, num_output=96, stride=2, weight_filler=dict(type='xavier'))
+    n.drop1 = L.Dropout(n.conv3, dropout_ratio=0.5)
+    n.elu3 = L.ELU(n.drop1, in_place=True)
 
     # second stack
     n.conv4 = L.Convolution(n.elu3, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
-    n.elu4 = L.ELU(n.conv4, in_place=True)
-    n.conv5 = L.Convolution(n.elu4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
+    n.conv5 = L.Convolution(n.conv4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
     n.bn2 = L.BatchNorm(n.conv5)
-    n.elu5 = L.ELU(n.bn2, in_place=True)
-    n.drop4 = L.Dropout(n.elu5, dropout_ratio=0.5)
-    # Convolution replaces pooling
-    n.conv6 = L.Convolution(n.drop4, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
-    n.elu6 = L.ELU(n.conv6, in_place=True)
+    n.conv6 = L.Convolution(n.bn2, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
+    n.drop4 = L.Dropout(n.conv6, dropout_ratio=0.5)
+    n.elu6 = L.ELU(n.drop4, in_place=True)
 
     # final stack and output
     n.conv7 = L.Convolution(n.elu6, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
@@ -109,25 +97,19 @@ def allcnn_leakyrelu(lmdb, batch_size):
     n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb,ntop=2)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
-    n.relu1 = L.ReLU(n.conv1, negative_slope = 0.01, in_place=True)
-    n.conv2 = L.Convolution(n.relu1, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
+    n.conv2 = L.Convolution(n.conv1, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
     n.bn1 = L.BatchNorm(n.conv2)
-    n.relu2 = L.ReLU(n.bn1, negative_slope = 0.01, in_place=True)
-    n.drop1 = L.Dropout(n.relu2, dropout_ratio=0.5)
-    # Convolution replaces pooling
-    n.conv3 = L.Convolution(n.drop1, kernel_size=3, num_output=96, stride=2, weight_filler=dict(type='xavier'))
-    n.relu3 = L.ReLU(n.conv3, negative_slope = 0.01, in_place=True)
+    n.conv3 = L.Convolution(n.bn1, kernel_size=3, num_output=96, stride=2, weight_filler=dict(type='xavier'))
+    n.drop1 = L.Dropout(n.conv3, dropout_ratio=0.5)
+    n.relu3 = L.ReLU(n.drop1, negative_slope = 0.01, in_place=True)
 
     # second stack
     n.conv4 = L.Convolution(n.relu3, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
-    n.relu4 = L.ReLU(n.conv4, negative_slope = 0.01, in_place=True)
-    n.conv5 = L.Convolution(n.relu4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
+    n.conv5 = L.Convolution(n.conv4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
     n.bn2 = L.BatchNorm(n.conv5)
-    n.relu5 = L.ReLU(n.bn2, negative_slope = 0.01, in_place=True)
-    n.drop4 = L.Dropout(n.relu5, dropout_ratio=0.5)
-    # Convolution replaces pooling
-    n.conv6 = L.Convolution(n.drop4, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
-    n.relu6 = L.ReLU(n.conv6, negative_slope = 0.01, in_place=True)
+    n.conv6 = L.Convolution(n.bn2, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
+    n.drop4 = L.Dropout(n.conv6, dropout_ratio=0.5)
+    n.relu6 = L.ReLU(n.drop4, negative_slope = 0.01, in_place=True)
 
     # final stack and output
     n.conv7 = L.Convolution(n.relu6, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
@@ -154,25 +136,19 @@ def allcnn_sigmoid(lmdb, batch_size):
     n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb,ntop=2)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
-    n.sig1 = L.Sigmoid(n.conv1, in_place=True)
-    n.conv2 = L.Convolution(n.sig1, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
+    n.conv2 = L.Convolution(n.conv1, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
     n.bn1 = L.BatchNorm(n.conv2)
-    n.sig2 = L.Sigmoid(n.bn1, in_place=True)
-    n.drop1 = L.Dropout(n.sig2, dropout_ratio=0.5)
-    # Convolution replaces pooling
-    n.conv3 = L.Convolution(n.drop1, kernel_size=3, num_output=96, stride=2, weight_filler=dict(type='xavier'))
-    n.sig3 = L.Sigmoid(n.conv3, in_place=True)
+    n.conv3 = L.Convolution(n.bn1, kernel_size=3, num_output=96, stride=2, weight_filler=dict(type='xavier'))
+    n.drop1 = L.Dropout(n.conv3, dropout_ratio=0.5)
+    n.sig3 = L.Sigmoid(n.drop1, in_place=True)
 
     # second stack
     n.conv4 = L.Convolution(n.sig3, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
-    n.sig4 = L.Sigmoid(n.conv4, in_place=True)
-    n.conv5 = L.Convolution(n.sig4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
+    n.conv5 = L.Convolution(n.conv4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
     n.bn2 = L.BatchNorm(n.conv5)
-    n.sig5 = L.Sigmoid(n.bn2, in_place=True)
-    n.drop4 = L.Dropout(n.sig5, dropout_ratio=0.5)
-    # Convolution replaces pooling
-    n.conv6 = L.Convolution(n.drop4, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
-    n.sig6 = L.Sigmoid(n.conv6, in_place=True)
+    n.conv6 = L.Convolution(n.bn2, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
+    n.drop4 = L.Dropout(n.conv6, dropout_ratio=0.5)
+    n.sig6 = L.Sigmoid(n.drop4, in_place=True)
 
     # final stack and output
     n.conv7 = L.Convolution(n.sig6, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
@@ -199,25 +175,19 @@ def allcnn_tanh(lmdb, batch_size):
     n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb,ntop=2)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
-    n.tanh1 = L.TanH(n.conv1, in_place=True)
-    n.conv2 = L.Convolution(n.tanh1, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
+    n.conv2 = L.Convolution(n.conv1, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
     n.bn1 = L.BatchNorm(n.conv2)
-    n.tanh2 = L.TanH(n.bn1, in_place=True)
-    n.drop1 = L.Dropout(n.tanh2, dropout_ratio=0.5)
-    # Convolution replaces pooling
-    n.conv3 = L.Convolution(n.drop1, kernel_size=3, num_output=96, stride=2, weight_filler=dict(type='xavier'))
-    n.tanh3 = L.TanH(n.conv3, in_place=True)
+    n.conv3 = L.Convolution(n.bn1, kernel_size=3, num_output=96, stride=2, weight_filler=dict(type='xavier'))
+    n.drop1 = L.Dropout(n.conv3, dropout_ratio=0.5)
+    n.tanh3 = L.TanH(n.drop1, in_place=True)
 
     # second stack
     n.conv4 = L.Convolution(n.tanh3, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
-    n.tanh4 = L.TanH(n.conv4, in_place=True)
-    n.conv5 = L.Convolution(n.tanh4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
+    n.conv5 = L.Convolution(n.conv4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
     n.bn2 = L.BatchNorm(n.conv5)
-    n.tanh5 = L.TanH(n.bn2, in_place=True)
-    n.drop4 = L.Dropout(n.tanh5, dropout_ratio=0.5)
-    # Convolution replaces pooling
-    n.conv6 = L.Convolution(n.drop4, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
-    n.tanh6 = L.TanH(n.conv6, in_place=True)
+    n.conv6 = L.Convolution(n.bn2, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
+    n.drop4 = L.Dropout(n.conv6, dropout_ratio=0.5)
+    n.tanh6 = L.TanH(n.drop4, in_place=True)
 
     # final stack and output
     n.conv7 = L.Convolution(n.tanh6, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
@@ -244,25 +214,19 @@ def allcnn_absval(lmdb, batch_size):
     n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb,ntop=2)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
-    n.absval1 = L.AbsVal(n.conv1, in_place=True)
-    n.conv2 = L.Convolution(n.absval1, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
+    n.conv2 = L.Convolution(n.conv1, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
     n.bn1 = L.BatchNorm(n.conv2)
-    n.absval2 = L.AbsVal(n.bn1, in_place=True)
-    n.drop1 = L.Dropout(n.absval2, dropout_ratio=0.5)
-    # Convolution replaces pooling
-    n.conv3 = L.Convolution(n.drop1, kernel_size=3, num_output=96, stride=2, weight_filler=dict(type='xavier'))
-    n.absval3 = L.AbsVal(n.conv3, in_place=True)
+    n.conv3 = L.Convolution(n.bn1, kernel_size=3, num_output=96, stride=2, weight_filler=dict(type='xavier'))
+    n.drop1 = L.Dropout(n.conv3, dropout_ratio=0.5)
+    n.absval3 = L.AbsVal(n.drop1, in_place=True)
 
     # second stack
     n.conv4 = L.Convolution(n.absval3, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
-    n.absval4 = L.AbsVal(n.conv4, in_place=True)
-    n.conv5 = L.Convolution(n.absval4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
+    n.conv5 = L.Convolution(n.conv4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
     n.bn2 = L.BatchNorm(n.conv5)
-    n.absval5 = L.AbsVal(n.bn2, in_place=True)
-    n.drop4 = L.Dropout(n.absval5, dropout_ratio=0.5)
-    # Convolution replaces pooling
-    n.conv6 = L.Convolution(n.drop4, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
-    n.absval6 = L.AbsVal(n.conv6, in_place=True)
+    n.conv6 = L.Convolution(n.bn2, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
+    n.drop4 = L.Dropout(n.conv6, dropout_ratio=0.5)
+    n.absval6 = L.AbsVal(n.drop4, in_place=True)
 
     # final stack and output
     n.conv7 = L.Convolution(n.absval6, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
@@ -289,25 +253,19 @@ def allcnn_power(lmdb, batch_size):
     n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb,ntop=2)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
-    n.power1 = L.Power(n.conv1, in_place=True)
-    n.conv2 = L.Convolution(n.power1, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
+    n.conv2 = L.Convolution(n.conv1, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
     n.bn1 = L.BatchNorm(n.conv2)
-    n.power2 = L.Power(n.bn1, in_place=True)
-    n.drop1 = L.Dropout(n.power2, dropout_ratio=0.5)
-    # Convolution replaces pooling
-    n.conv3 = L.Convolution(n.drop1, kernel_size=3, num_output=96, stride=2, weight_filler=dict(type='xavier'))
-    n.power3 = L.Power(n.conv3, in_place=True)
+    n.conv3 = L.Convolution(n.bn1, kernel_size=3, num_output=96, stride=2, weight_filler=dict(type='xavier'))
+    n.drop1 = L.Dropout(n.conv3, dropout_ratio=0.5)
+    n.power3 = L.Power(n.drop1, in_place=True)
 
     # second stack
     n.conv4 = L.Convolution(n.power3, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
-    n.power4 = L.Power(n.conv4, in_place=True)
-    n.conv5 = L.Convolution(n.power4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
+    n.conv5 = L.Convolution(n.conv4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
     n.bn2 = L.BatchNorm(n.conv5)
-    n.power5 = L.Power(n.bn2, in_place=True)
-    n.drop4 = L.Dropout(n.power5, dropout_ratio=0.5)
-    # Convolution replaces pooling
-    n.conv6 = L.Convolution(n.drop4, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
-    n.power6 = L.Power(n.conv6, in_place=True)
+    n.conv6 = L.Convolution(n.bn2, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
+    n.drop4 = L.Dropout(n.conv6, dropout_ratio=0.5)
+    n.power6 = L.Power(n.drop4, in_place=True)
 
     # final stack and output
     n.conv7 = L.Convolution(n.power6, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
@@ -334,25 +292,19 @@ def allcnn_bnll(lmdb, batch_size):
     n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb,ntop=2)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
-    n.bnll1 = L.BNLL(n.conv1, in_place=True)
-    n.conv2 = L.Convolution(n.bnll1, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
+    n.conv2 = L.Convolution(n.conv1, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
     n.bn1 = L.BatchNorm(n.conv2)
-    n.bnll2 = L.BNLL(n.bn1, in_place=True)
-    n.drop1 = L.Dropout(n.bnll2, dropout_ratio=0.5)
-    # Convolution replaces pooling
-    n.conv3 = L.Convolution(n.drop1, kernel_size=3, num_output=96, stride=2, weight_filler=dict(type='xavier'))
-    n.bnll3 = L.BNLL(n.conv3, in_place=True)
+    n.conv3 = L.Convolution(n.bn1, kernel_size=3, num_output=96, stride=2, weight_filler=dict(type='xavier'))
+    n.drop1 = L.Dropout(n.conv3, dropout_ratio=0.5)
+    n.bnll3 = L.BNLL(n.drop1, in_place=True)
 
     # second stack
     n.conv4 = L.Convolution(n.bnll3, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
-    n.bnll4 = L.BNLL(n.conv4, in_place=True)
-    n.conv5 = L.Convolution(n.bnll4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
+    n.conv5 = L.Convolution(n.conv4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
     n.bn2 = L.BatchNorm(n.conv5)
-    n.bnll5 = L.BNLL(n.bn2, in_place=True)
-    n.drop4 = L.Dropout(n.bnll5, dropout_ratio=0.5)
-    # Convolution replaces pooling
-    n.conv6 = L.Convolution(n.drop4, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
-    n.bnll6 = L.BNLL(n.conv6, in_place=True)
+    n.conv6 = L.Convolution(n.bn2, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
+    n.drop4 = L.Dropout(n.conv6, dropout_ratio=0.5)
+    n.bnll6 = L.BNLL(n.drop4, in_place=True)
 
     # final stack and output
     n.conv7 = L.Convolution(n.bnll6, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
