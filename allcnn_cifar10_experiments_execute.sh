@@ -1,6 +1,6 @@
 set -e
 
-cd cifa-10/relu/
+cd cifar-10_allcnn/relu/
 ./train_all_relu.sh
 cd ../elu
 ./train_all_elu.sh
