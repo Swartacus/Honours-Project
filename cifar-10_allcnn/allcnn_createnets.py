@@ -37,7 +37,7 @@ def allcnn_relu(lmdb, batch_size, mean):
     n.relu4 = L.ReLU(n.conv4, in_place=True)
     n.conv5 = L.Convolution(n.relu4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
     n.bn2 = L.BatchNorm(n.conv5)
-    n.relu5 = L.ReLU(n.conv5, in_place=True)
+    n.relu5 = L.ReLU(n.bn2, in_place=True)
     # Convolution with stride 2 replaces pooling
     n.conv6 = L.Convolution(n.relu5, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
     n.drop4 = L.Dropout(n.conv6, dropout_ratio=0.5)
@@ -84,7 +84,7 @@ def allcnn_elu(lmdb, batch_size, mean):
     n.elu4 = L.ELU(n.conv4, in_place=True)
     n.conv5 = L.Convolution(n.elu4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
     n.bn2 = L.BatchNorm(n.conv5)
-    n.elu5 = L.ELU(n.conv5, in_place=True)
+    n.elu5 = L.ELU(n.bn2, in_place=True)
     # Convolution with stride 2 replaces pooling
     n.conv6 = L.Convolution(n.elu5, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
     n.drop4 = L.Dropout(n.conv6, dropout_ratio=0.5)
@@ -129,7 +129,7 @@ def allcnn_leakyrelu(lmdb, batch_size, mean):
     n.relu4 = L.ReLU(n.conv4, negative_slope = 0.01, in_place=True)
     n.conv5 = L.Convolution(n.relu4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
     n.bn2 = L.BatchNorm(n.conv5)
-    n.relu5 = L.ReLU(n.conv5, negative_slope = 0.01, in_place=True)
+    n.relu5 = L.ReLU(n.bn2, negative_slope = 0.01, in_place=True)
     # Convolution with stride 2 replaces pooling
     n.conv6 = L.Convolution(n.relu5, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
     n.drop4 = L.Dropout(n.conv6, dropout_ratio=0.5)
@@ -174,7 +174,7 @@ def allcnn_sigmoid(lmdb, batch_size, mean):
     n.sig4 = L.Sigmoid(n.conv4, in_place=True)
     n.conv5 = L.Convolution(n.sig4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
     n.bn2 = L.BatchNorm(n.conv5)
-    n.sig5 = L.Sigmoid(n.conv5, in_place=True)
+    n.sig5 = L.Sigmoid(n.bn2, in_place=True)
     # Convolution with stride 2 replaces pooling
     n.conv6 = L.Convolution(n.sig5, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
     n.drop4 = L.Dropout(n.conv6, dropout_ratio=0.5)
@@ -219,7 +219,7 @@ def allcnn_tanh(lmdb, batch_size, mean):
     n.tanh4 = L.TanH(n.conv4, in_place=True)
     n.conv5 = L.Convolution(n.tanh4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
     n.bn2 = L.BatchNorm(n.conv5)
-    n.tanh5 = L.TanH(n.conv5, in_place=True)
+    n.tanh5 = L.TanH(n.bn2, in_place=True)
     # Convolution with stride 2 replaces pooling
     n.conv6 = L.Convolution(n.tanh5, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
     n.drop4 = L.Dropout(n.conv6, dropout_ratio=0.5)
@@ -264,7 +264,7 @@ def allcnn_absval(lmdb, batch_size, mean):
     n.absval4 = L.AbsVal(n.conv4, in_place=True)
     n.conv5 = L.Convolution(n.absval4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
     n.bn2 = L.BatchNorm(n.conv5)
-    n.absval5 = L.AbsVal(n.conv5, in_place=True)
+    n.absval5 = L.AbsVal(n.bn2, in_place=True)
     # Convolution with stride 2 replaces pooling
     n.conv6 = L.Convolution(n.absval5, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
     n.drop4 = L.Dropout(n.conv6, dropout_ratio=0.5)
@@ -309,7 +309,7 @@ def allcnn_power(lmdb, batch_size, mean):
     n.power4 = L.Power(n.conv4, in_place=True)
     n.conv5 = L.Convolution(n.power4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
     n.bn2 = L.BatchNorm(n.conv5)
-    n.power5 = L.Power(n.conv5, in_place=True)
+    n.power5 = L.Power(n.bn2, in_place=True)
     # Convolution with stride 2 replaces pooling
     n.conv6 = L.Convolution(n.power5, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
     n.drop4 = L.Dropout(n.conv6, dropout_ratio=0.5)
@@ -354,7 +354,7 @@ def allcnn_bnll(lmdb, batch_size, mean):
     n.bnll4 = L.BNLL(n.conv4, in_place=True)
     n.conv5 = L.Convolution(n.bnll4, kernel_size=3, num_output=192, weight_filler=dict(type='xavier'))
     n.bn2 = L.BatchNorm(n.conv5)
-    n.bnll5 = L.BNLL(n.conv5, in_place=True)
+    n.bnll5 = L.BNLL(n.bn2, in_place=True)
     # Convolution with stride 2 replaces pooling
     n.conv6 = L.Convolution(n.bnll5, kernel_size=3, num_output=192, stride=2, weight_filler=dict(type='xavier'))
     n.drop4 = L.Dropout(n.conv6, dropout_ratio=0.5)
