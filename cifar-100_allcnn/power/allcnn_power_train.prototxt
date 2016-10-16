@@ -229,12 +229,38 @@ layer {
   top: "flatten"
 }
 layer {
-  name: "score"
+  name: "ip_c"
   type: "InnerProduct"
   bottom: "flatten"
-  top: "score"
+  top: "ip_c"
   inner_product_param {
-    num_output: 10
+    num_output: 20
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "accuracy_f"
+  type: "Accuracy"
+  bottom: "ip_c"
+  bottom: "label_coarse"
+  top: "accuracy_f"
+}
+layer {
+  name: "loss_c"
+  type: "SoftmaxWithLoss"
+  bottom: "ip_c"
+  bottom: "label_coarse"
+  top: "loss_c"
+}
+layer {
+  name: "ip_f"
+  type: "InnerProduct"
+  bottom: "flatten"
+  top: "ip_f"
+  inner_product_param {
+    num_output: 100
     weight_filler {
       type: "gaussian"
     }
@@ -243,14 +269,14 @@ layer {
 layer {
   name: "accuracy"
   type: "Accuracy"
-  bottom: "score"
+  bottom: "ip_f"
   bottom: "label_fine"
   top: "accuracy"
 }
 layer {
-  name: "loss"
+  name: "loss_f"
   type: "SoftmaxWithLoss"
-  bottom: "score"
+  bottom: "ip_f"
   bottom: "label_fine"
-  top: "loss"
+  top: "loss_f"
 }

@@ -53,7 +53,7 @@ def allcnn_relu(lmdb, batch_size, mean):
 
     n.pool = L.Pooling(n.relu9, global_pooling=True, pool=P.Pooling.AVE)
     n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
+    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='xavier'))
     n.accuracy = L.Accuracy(n.score, n.label)
     n.loss = L.SoftmaxWithLoss(n.score, n.label)
 
@@ -100,7 +100,7 @@ def allcnn_elu(lmdb, batch_size, mean):
 
     n.pool = L.Pooling(n.elu9, global_pooling=True, pool=P.Pooling.AVE)
     n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
+    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='xavier'))
     n.accuracy = L.Accuracy(n.score, n.label)
     n.loss = L.SoftmaxWithLoss(n.score, n.label)
 
@@ -145,7 +145,7 @@ def allcnn_leakyrelu(lmdb, batch_size, mean):
 
     n.pool = L.Pooling(n.relu9, global_pooling=True, pool=P.Pooling.AVE)
     n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
+    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='xavier'))
     n.accuracy = L.Accuracy(n.score, n.label)
     n.loss = L.SoftmaxWithLoss(n.score, n.label)
 
@@ -190,7 +190,7 @@ def allcnn_sigmoid(lmdb, batch_size, mean):
 
     n.pool = L.Pooling(n.sig9, global_pooling=True, pool=P.Pooling.AVE)
     n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
+    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='xavier'))
     n.accuracy = L.Accuracy(n.score, n.label)
     n.loss = L.SoftmaxWithLoss(n.score, n.label)
 
@@ -235,7 +235,7 @@ def allcnn_tanh(lmdb, batch_size, mean):
 
     n.pool = L.Pooling(n.tanh9, global_pooling=True, pool=P.Pooling.AVE)
     n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
+    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='xavier'))
     n.accuracy = L.Accuracy(n.score, n.label)
     n.loss = L.SoftmaxWithLoss(n.score, n.label)
 
@@ -280,7 +280,7 @@ def allcnn_absval(lmdb, batch_size, mean):
 
     n.pool = L.Pooling(n.absval9, global_pooling=True, pool=P.Pooling.AVE)
     n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
+    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='xavier'))
     n.accuracy = L.Accuracy(n.score, n.label)
     n.loss = L.SoftmaxWithLoss(n.score, n.label)
 
@@ -325,7 +325,7 @@ def allcnn_power(lmdb, batch_size, mean):
 
     n.pool = L.Pooling(n.power9, global_pooling=True, pool=P.Pooling.AVE)
     n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
+    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='xavier'))
     n.accuracy = L.Accuracy(n.score, n.label)
     n.loss = L.SoftmaxWithLoss(n.score, n.label)
 
@@ -370,7 +370,7 @@ def allcnn_bnll(lmdb, batch_size, mean):
 
     n.pool = L.Pooling(n.bnll9, global_pooling=True, pool=P.Pooling.AVE)
     n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
+    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='xavier'))
     n.accuracy = L.Accuracy(n.score, n.label)
     n.loss = L.SoftmaxWithLoss(n.score, n.label)
 

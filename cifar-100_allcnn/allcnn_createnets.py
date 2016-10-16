@@ -48,9 +48,12 @@ def allcnn_relu(sname, batch_size):
 
     n.pool = L.Pooling(n.relu9, global_pooling=True, pool=P.Pooling.AVE)
     n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
-    n.accuracy = L.Accuracy(n.score, n.label_fine)
-    n.loss = L.SoftmaxWithLoss(n.score, n.label_fine)
+    n.ip_c = L.InnerProduct(n.flatten, num_output=20, weight_filler=dict(type='xavier'))
+    n.accuracy_f = L.Accuracy(n.ip_c, n.label_coarse)
+    n.loss_c = L.SoftmaxWithLoss(n.ip_c, n.label_coarse)
+    n.ip_f = L.InnerProduct(n.flatten, num_output=100, weight_filler=dict(type='xavier'))
+    n.accuracy = L.Accuracy(n.ip_f, n.label_fine)
+    n.loss_f = L.SoftmaxWithLoss(n.ip_f, n.label_fine)
 
     return n.to_proto()
 
@@ -94,9 +97,12 @@ def allcnn_elu(sname, batch_size):
 
     n.pool = L.Pooling(n.elu9, global_pooling=True, pool=P.Pooling.AVE)
     n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
-    n.accuracy = L.Accuracy(n.score, n.label_fine)
-    n.loss = L.SoftmaxWithLoss(n.score, n.label_fine)
+    n.ip_c = L.InnerProduct(n.flatten, num_output=20, weight_filler=dict(type='xavier'))
+    n.accuracy_f = L.Accuracy(n.ip_c, n.label_coarse)
+    n.loss_c = L.SoftmaxWithLoss(n.ip_c, n.label_coarse)
+    n.ip_f = L.InnerProduct(n.flatten, num_output=100, weight_filler=dict(type='xavier'))
+    n.accuracy = L.Accuracy(n.ip_f, n.label_fine)
+    n.loss_f = L.SoftmaxWithLoss(n.ip_f, n.label_fine)
 
     return n.to_proto()
 
@@ -139,9 +145,12 @@ def allcnn_leakyrelu(sname, batch_size):
 
     n.pool = L.Pooling(n.relu9, global_pooling=True, pool=P.Pooling.AVE)
     n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
-    n.accuracy = L.Accuracy(n.score, n.label_fine)
-    n.loss = L.SoftmaxWithLoss(n.score, n.label_fine)
+    n.ip_c = L.InnerProduct(n.flatten, num_output=20, weight_filler=dict(type='xavier'))
+    n.accuracy_f = L.Accuracy(n.ip_c, n.label_coarse)
+    n.loss_c = L.SoftmaxWithLoss(n.ip_c, n.label_coarse)
+    n.ip_f = L.InnerProduct(n.flatten, num_output=100, weight_filler=dict(type='xavier'))
+    n.accuracy = L.Accuracy(n.ip_f, n.label_fine)
+    n.loss_f = L.SoftmaxWithLoss(n.ip_f, n.label_fine)
 
     return n.to_proto()
 
@@ -184,9 +193,12 @@ def allcnn_sigmoid(sname, batch_size):
 
     n.pool = L.Pooling(n.sig9, global_pooling=True, pool=P.Pooling.AVE)
     n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
-    n.accuracy = L.Accuracy(n.score, n.label_fine)
-    n.loss = L.SoftmaxWithLoss(n.score, n.label_fine)
+    n.ip_c = L.InnerProduct(n.flatten, num_output=20, weight_filler=dict(type='xavier'))
+    n.accuracy_f = L.Accuracy(n.ip_c, n.label_coarse)
+    n.loss_c = L.SoftmaxWithLoss(n.ip_c, n.label_coarse)
+    n.ip_f = L.InnerProduct(n.flatten, num_output=100, weight_filler=dict(type='xavier'))
+    n.accuracy = L.Accuracy(n.ip_f, n.label_fine)
+    n.loss_f = L.SoftmaxWithLoss(n.ip_f, n.label_fine)
 
     return n.to_proto()
 
@@ -229,9 +241,12 @@ def allcnn_tanh(sname, batch_size):
 
     n.pool = L.Pooling(n.tanh9, global_pooling=True, pool=P.Pooling.AVE)
     n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
-    n.accuracy = L.Accuracy(n.score, n.label_fine)
-    n.loss = L.SoftmaxWithLoss(n.score, n.label_fine)
+    n.ip_c = L.InnerProduct(n.flatten, num_output=20, weight_filler=dict(type='xavier'))
+    n.accuracy_f = L.Accuracy(n.ip_c, n.label_coarse)
+    n.loss_c = L.SoftmaxWithLoss(n.ip_c, n.label_coarse)
+    n.ip_f = L.InnerProduct(n.flatten, num_output=100, weight_filler=dict(type='xavier'))
+    n.accuracy = L.Accuracy(n.ip_f, n.label_fine)
+    n.loss_f = L.SoftmaxWithLoss(n.ip_f, n.label_fine)
 
     return n.to_proto()
 
@@ -274,9 +289,12 @@ def allcnn_absval(sname, batch_size):
 
     n.pool = L.Pooling(n.absval9, global_pooling=True, pool=P.Pooling.AVE)
     n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
-    n.accuracy = L.Accuracy(n.score, n.label_fine)
-    n.loss = L.SoftmaxWithLoss(n.score, n.label_fine)
+    n.ip_c = L.InnerProduct(n.flatten, num_output=20, weight_filler=dict(type='xavier'))
+    n.accuracy_f = L.Accuracy(n.ip_c, n.label_coarse)
+    n.loss_c = L.SoftmaxWithLoss(n.ip_c, n.label_coarse)
+    n.ip_f = L.InnerProduct(n.flatten, num_output=100, weight_filler=dict(type='xavier'))
+    n.accuracy = L.Accuracy(n.ip_f, n.label_fine)
+    n.loss_f = L.SoftmaxWithLoss(n.ip_f, n.label_fine)
 
     return n.to_proto()
 
@@ -319,9 +337,12 @@ def allcnn_power(sname, batch_size):
 
     n.pool = L.Pooling(n.power9, global_pooling=True, pool=P.Pooling.AVE)
     n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
-    n.accuracy = L.Accuracy(n.score, n.label_fine)
-    n.loss = L.SoftmaxWithLoss(n.score, n.label_fine)
+    n.ip_c = L.InnerProduct(n.flatten, num_output=20, weight_filler=dict(type='xavier'))
+    n.accuracy_f = L.Accuracy(n.ip_c, n.label_coarse)
+    n.loss_c = L.SoftmaxWithLoss(n.ip_c, n.label_coarse)
+    n.ip_f = L.InnerProduct(n.flatten, num_output=100, weight_filler=dict(type='xavier'))
+    n.accuracy = L.Accuracy(n.ip_f, n.label_fine)
+    n.loss_f = L.SoftmaxWithLoss(n.ip_f, n.label_fine)
 
     return n.to_proto()
 
@@ -364,9 +385,12 @@ def allcnn_bnll(sname, batch_size):
 
     n.pool = L.Pooling(n.bnll9, global_pooling=True, pool=P.Pooling.AVE)
     n.flatten = L.Flatten(n.pool)
-    n.score = L.InnerProduct(n.flatten, num_output=10, weight_filler=dict(type='gaussian'))
-    n.accuracy = L.Accuracy(n.score, n.label_fine)
-    n.loss = L.SoftmaxWithLoss(n.score, n.label_fine)
+    n.ip_c = L.InnerProduct(n.flatten, num_output=20, weight_filler=dict(type='xavier'))
+    n.accuracy_f = L.Accuracy(n.ip_c, n.label_coarse)
+    n.loss_c = L.SoftmaxWithLoss(n.ip_c, n.label_coarse)
+    n.ip_f = L.InnerProduct(n.flatten, num_output=100, weight_filler=dict(type='xavier'))
+    n.accuracy = L.Accuracy(n.ip_f, n.label_fine)
+    n.loss_f = L.SoftmaxWithLoss(n.ip_f, n.label_fine)
 
     return n.to_proto()
 
@@ -465,7 +489,7 @@ def allcnn_bnll(sname, batch_size):
 #     n.relu9 = L.ReLU(n.conv9, in_place=True)
 #     n.pool = L.Pooling(n.relu9, global_pooling=True, pool=P.Pooling.AVE)
 #     n.flatten = L.Flatten(n.pool)
-#     n.score = L.InnerProduct(n.flatten, num_output=100, weight_filler=dict(type='gaussian'))
+#     n.score = L.InnerProduct(n.flatten, num_output=100, weight_filler=dict(type='xavier'))
 #     n.loss = L.SoftmaxWithLoss(n.score, n.label_fine)
 #
 #     return n.to_proto()
