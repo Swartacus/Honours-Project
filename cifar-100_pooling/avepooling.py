@@ -483,10 +483,10 @@ def cnn_bnll(sname, batch_size):
 
 
 # with open('cnn_relu_train.prototxt','w') as f:
-#     f.write(str(cnn_relu('../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+#     f.write(str(cnn_relu('../../data/cifar-10/cifar10_train_sname', 64, 'mean.binaryproto')))
 #
 # with open('cnn_relu_test.prototxt','w') as f:
-#     f.write(str(cnn_relu('../../data/cifar-10/cifar10_test_lmdb', 64, 'mean.binaryproto')))
+#     f.write(str(cnn_relu('../../data/cifar-10/cifar10_test_sname', 64, 'mean.binaryproto')))
 #
 # caffe.set_device(0)
 # caffe.set_mode_gpu()

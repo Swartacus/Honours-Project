@@ -1,12 +1,12 @@
 layer {
   name: "data"
-  type: "Data"
+  type: "HDF5Data"
   top: "data"
-  top: "label"
-  data_param {
-    source: "../../../../data/cifar-10/cifar10_train_lmdb"
+  top: "label_coarse"
+  top: "label_fine"
+  hdf5_data_param {
+    source: "../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt"
     batch_size: 64
-    backend: LMDB
   }
 }
 layer {
@@ -359,28 +359,54 @@ layer {
   top: "flatten"
 }
 layer {
-  name: "score"
+  name: "ip_c"
   type: "InnerProduct"
   bottom: "flatten"
-  top: "score"
+  top: "ip_c"
   inner_product_param {
-    num_output: 10
+    num_output: 20
     weight_filler {
-      type: "gaussian"
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "accuracy_f"
+  type: "Accuracy"
+  bottom: "ip_c"
+  bottom: "label_coarse"
+  top: "accuracy_f"
+}
+layer {
+  name: "loss_c"
+  type: "SoftmaxWithLoss"
+  bottom: "ip_c"
+  bottom: "label_coarse"
+  top: "loss_c"
+}
+layer {
+  name: "ip_f"
+  type: "InnerProduct"
+  bottom: "flatten"
+  top: "ip_f"
+  inner_product_param {
+    num_output: 100
+    weight_filler {
+      type: "xavier"
     }
   }
 }
 layer {
   name: "accuracy"
   type: "Accuracy"
-  bottom: "score"
-  bottom: "label"
+  bottom: "ip_f"
+  bottom: "label_fine"
   top: "accuracy"
 }
 layer {
-  name: "loss"
+  name: "loss_f"
   type: "SoftmaxWithLoss"
-  bottom: "score"
-  bottom: "label"
-  top: "loss"
+  bottom: "ip_f"
+  bottom: "label_fine"
+  top: "loss_f"
 }

@@ -26,130 +26,130 @@ for p in pools:
     # create relu net:
     with open('{}/relu/poolcnn_relu_train.prototxt'.format(p),'w') as f:
         if p == 'average':
-            f.write(str(create_ave.cnn_relu('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_ave.cnn_relu('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
         if p == 'max':
-            f.write(str(create_max.cnn_relu('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_max.cnn_relu('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
         if p == 'stochastic':
-            f.write(str(create_stoch.cnn_relu('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_stoch.cnn_relu('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
     with open('{}/relu/poolcnn_relu_test.prototxt'.format(p),'w') as f:
         if p == 'average':
-            f.write(str(create_ave.cnn_relu('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_ave.cnn_relu('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
         if p == 'max':
-            f.write(str(create_max.cnn_relu('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_max.cnn_relu('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
         if p == 'stochastic':
-            f.write(str(create_stoch.cnn_relu('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_stoch.cnn_relu('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
 
     # create leakyrelu net:
     with open('{}/leakyrelu/poolcnn_relu_train.prototxt'.format(p),'w') as f:
         if p == 'average':
-            f.write(str(create_ave.cnn_leakyrelu('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_ave.cnn_leakyrelu('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
         if p == 'max':
-            f.write(str(create_max.cnn_leakyrelu('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_max.cnn_leakyrelu('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
         if p == 'stochastic':
-            f.write(str(create_stoch.cnn_leakyrelu('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_stoch.cnn_leakyrelu('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
     with open('{}/leakyrelu/poolcnn_relu_test.prototxt'.format(p),'w') as f:
         if p == 'average':
-            f.write(str(create_ave.cnn_leakyrelu('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_ave.cnn_leakyrelu('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
         if p == 'max':
-            f.write(str(create_max.cnn_leakyrelu('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_max.cnn_leakyrelu('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
         if p == 'stochastic':
-            f.write(str(create_stoch.cnn_leakyrelu('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_stoch.cnn_leakyrelu('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
 
     # create sigmoid net:
     with open('{}/sigmoid/poolcnn_relu_train.prototxt'.format(p),'w') as f:
         if p == 'average':
-            f.write(str(create_ave.cnn_sig('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_ave.cnn_sig('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
         if p == 'max':
-            f.write(str(create_max.cnn_sig('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_max.cnn_sig('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
         if p == 'stochastic':
-            f.write(str(create_stoch.cnn_sig('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_stoch.cnn_sig('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
     with open('{}/sigmoid/poolcnn_relu_test.prototxt'.format(p),'w') as f:
         if p == 'average':
-            f.write(str(create_ave.cnn_sig('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_ave.cnn_sig('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
         if p == 'max':
-            f.write(str(create_max.cnn_sig('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_max.cnn_sig('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
         if p == 'stochastic':
-            f.write(str(create_stoch.cnn_sig('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_stoch.cnn_sig('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
 
     # create tanh net:
     with open('{}/tanh/poolcnn_relu_train.prototxt'.format(p),'w') as f:
         if p == 'average':
-            f.write(str(create_ave.cnn_tanh('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_ave.cnn_tanh('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
         if p == 'max':
-            f.write(str(create_max.cnn_tanh('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_max.cnn_tanh('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
         if p == 'stochastic':
-            f.write(str(create_stoch.cnn_tanh('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_stoch.cnn_tanh('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
     with open('{}/tanh/poolcnn_relu_test.prototxt'.format(p),'w') as f:
         if p == 'average':
-            f.write(str(create_ave.cnn_tanh('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_ave.cnn_tanh('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
         if p == 'max':
-            f.write(str(create_max.cnn_tanh('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_max.cnn_tanh('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
         if p == 'stochastic':
-            f.write(str(create_stoch.cnn_tanh('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_stoch.cnn_tanh('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
 
     # create absval net:
     with open('{}/absval/poolcnn_relu_train.prototxt'.format(p),'w') as f:
         if p == 'average':
-            f.write(str(create_ave.cnn_absval('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_ave.cnn_absval('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
         if p == 'max':
-            f.write(str(create_max.cnn_absval('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_max.cnn_absval('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
         if p == 'stochastic':
-            f.write(str(create_stoch.cnn_absval('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_stoch.cnn_absval('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
     with open('{}/absval/poolcnn_relu_test.prototxt'.format(p),'w') as f:
         if p == 'average':
-            f.write(str(create_ave.cnn_absval('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_ave.cnn_absval('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
         if p == 'max':
-            f.write(str(create_max.cnn_absval('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_max.cnn_absval('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
         if p == 'stochastic':
-            f.write(str(create_stoch.cnn_absval('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_stoch.cnn_absval('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
 
     # create power net:
     with open('{}/power/poolcnn_relu_train.prototxt'.format(p),'w') as f:
         if p == 'average':
-            f.write(str(create_ave.cnn_power('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_ave.cnn_power('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
         if p == 'max':
-            f.write(str(create_max.cnn_power('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_max.cnn_power('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
         if p == 'stochastic':
-            f.write(str(create_stoch.cnn_power('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_stoch.cnn_power('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
     with open('{}/power/poolcnn_relu_test.prototxt'.format(p),'w') as f:
         if p == 'average':
-            f.write(str(create_ave.cnn_power('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_ave.cnn_power('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
         if p == 'max':
-            f.write(str(create_max.cnn_power('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_max.cnn_power('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
         if p == 'stochastic':
-            f.write(str(create_stoch.cnn_power('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_stoch.cnn_power('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
 
     # create bnll net:
     with open('{}/bnll/poolcnn_relu_train.prototxt'.format(p),'w') as f:
         if p == 'average':
-            f.write(str(create_ave.cnn_bnll('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_ave.cnn_bnll('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
         if p == 'max':
-            f.write(str(create_max.cnn_bnll('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_max.cnn_bnll('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
         if p == 'stochastic':
-            f.write(str(create_stoch.cnn_bnll('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_stoch.cnn_bnll('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
     with open('{}/bnll/poolcnn_relu_test.prototxt'.format(p),'w') as f:
         if p == 'average':
-            f.write(str(create_ave.cnn_bnll('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_ave.cnn_bnll('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
         if p == 'max':
-            f.write(str(create_max.cnn_bnll('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_max.cnn_bnll('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
         if p == 'stochastic':
-            f.write(str(create_stoch.cnn_bnll('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_stoch.cnn_bnll('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
 
     # create elu net:
     with open('{}/elu/poolcnn_relu_train.prototxt'.format(p),'w') as f:
         if p == 'average':
-            f.write(str(create_ave.cnn_elu('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_ave.cnn_elu('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
         if p == 'max':
-            f.write(str(create_max.cnn_elu('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_max.cnn_elu('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
         if p == 'stochastic':
-            f.write(str(create_stoch.cnn_elu('../../../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+            f.write(str(create_stoch.cnn_elu('../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt', 64)))
     with open('{}/elu/poolcnn_relu_test.prototxt'.format(p),'w') as f:
         if p == 'average':
-            f.write(str(create_ave.cnn_elu('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_ave.cnn_elu('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
         if p == 'max':
-            f.write(str(create_max.cnn_elu('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_max.cnn_elu('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
         if p == 'stochastic':
-            f.write(str(create_stoch.cnn_elu('../../../../data/cifar-10/cifar10_test_lmdb', 100, 'mean.binaryproto')))
+            f.write(str(create_stoch.cnn_elu('../../../../data/cifar-100/cifar_100_caffe_hdf5/test.txt', 100)))
 
 
 

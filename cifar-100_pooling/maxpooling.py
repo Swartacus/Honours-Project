@@ -13,13 +13,13 @@ sys.path.insert(0, caffe_root + 'python')
 import caffe
 from caffe import layers as L, params as P
 
-def cnn_elu(lmdb, batch_size, mean):
+def cnn_elu(sname, batch_size):
     '''
     Creates a CNN that uses ELUs
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label_coarse, n.label_fine = L.HDF5Data(batch_size=batch_size, source=sname, ntop=3)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=5, num_output=192, weight_filler=dict(type='xavier'))
     n.pool1 = L.Pooling(n.conv1, kernel_size=2, stride=2, pool=P.Pooling.MAX)
@@ -71,13 +71,13 @@ def cnn_elu(lmdb, batch_size, mean):
 
     return n.to_proto()
 
-def cnn_relu(lmdb, batch_size, mean):
+def cnn_relu(sname, batch_size):
     '''
     Creates a CNN that uses ReLUs
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label_coarse, n.label_fine = L.HDF5Data(batch_size=batch_size, source=sname, ntop=3)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=5, num_output=192, weight_filler=dict(type='xavier'))
     n.pool1 = L.Pooling(n.conv1, kernel_size=2, stride=2, pool=P.Pooling.MAX)
@@ -129,13 +129,13 @@ def cnn_relu(lmdb, batch_size, mean):
 
     return n.to_proto()
 
-def cnn_leakyrelu(lmdb, batch_size, mean):
+def cnn_leakyrelu(sname, batch_size):
     '''
     Creates a CNN that uses LeakyReLUs
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label_coarse, n.label_fine = L.HDF5Data(batch_size=batch_size, source=sname, ntop=3)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=5, num_output=192, weight_filler=dict(type='xavier'))
     n.pool1 = L.Pooling(n.conv1, kernel_size=2, stride=2, pool=P.Pooling.MAX)
@@ -187,13 +187,13 @@ def cnn_leakyrelu(lmdb, batch_size, mean):
 
     return n.to_proto()
 
-def cnn_sig(lmdb, batch_size, mean):
+def cnn_sig(sname, batch_size):
     '''
     Creates a CNN that uses Sigmoids
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label_coarse, n.label_fine = L.HDF5Data(batch_size=batch_size, source=sname, ntop=3)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=5, num_output=192, weight_filler=dict(type='xavier'))
     n.pool1 = L.Pooling(n.conv1, kernel_size=2, stride=2, pool=P.Pooling.MAX)
@@ -246,13 +246,13 @@ def cnn_sig(lmdb, batch_size, mean):
     return n.to_proto()
 
 
-def cnn_tanh(lmdb, batch_size, mean):
+def cnn_tanh(sname, batch_size):
     '''
     Creates a CNN that uses TanH activations
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label_coarse, n.label_fine = L.HDF5Data(batch_size=batch_size, source=sname, ntop=3)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=5, num_output=192, weight_filler=dict(type='xavier'))
     n.pool1 = L.Pooling(n.conv1, kernel_size=2, stride=2, pool=P.Pooling.MAX)
@@ -304,13 +304,13 @@ def cnn_tanh(lmdb, batch_size, mean):
 
     return n.to_proto()
 
-def cnn_absval(lmdb, batch_size, mean):
+def cnn_absval(sname, batch_size):
     '''
     Creates a CNN that uses Absolute Value activations
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label_coarse, n.label_fine = L.HDF5Data(batch_size=batch_size, source=sname, ntop=3)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=5, num_output=192, weight_filler=dict(type='xavier'))
     n.pool1 = L.Pooling(n.conv1, kernel_size=2, stride=2, pool=P.Pooling.MAX)
@@ -363,13 +363,13 @@ def cnn_absval(lmdb, batch_size, mean):
     return n.to_proto()
 
 
-def cnn_power(lmdb, batch_size, mean):
+def cnn_power(sname, batch_size):
     '''
     Creates a CNN that uses Powers
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label_coarse, n.label_fine = L.HDF5Data(batch_size=batch_size, source=sname, ntop=3)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=5, num_output=192, weight_filler=dict(type='xavier'))
     n.pool1 = L.Pooling(n.conv1, kernel_size=2, stride=2, pool=P.Pooling.MAX)
@@ -421,13 +421,13 @@ def cnn_power(lmdb, batch_size, mean):
 
     return n.to_proto()
 
-def cnn_bnll(lmdb, batch_size, mean):
+def cnn_bnll(sname, batch_size):
     '''
     Creates a CNN that uses BNLL activations
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label_coarse, n.label_fine = L.HDF5Data(batch_size=batch_size, source=sname, ntop=3)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=5, num_output=192, weight_filler=dict(type='xavier'))
     n.pool1 = L.Pooling(n.conv1, kernel_size=2, stride=2, pool=P.Pooling.MAX)
@@ -482,10 +482,10 @@ def cnn_bnll(lmdb, batch_size, mean):
 
 
 # with open('cnn_relu_train.prototxt','w') as f:
-#     f.write(str(cnn_relu('../../data/cifar-10/cifar10_train_lmdb', 64, 'mean.binaryproto')))
+#     f.write(str(cnn_relu('../../data/cifar-10/cifar10_train_sname', 64, 'mean.binaryproto')))
 #
 # with open('cnn_relu_test.prototxt','w') as f:
-#     f.write(str(cnn_relu('../../data/cifar-10/cifar10_test_lmdb', 64, 'mean.binaryproto')))
+#     f.write(str(cnn_relu('../../data/cifar-10/cifar10_test_sname', 64, 'mean.binaryproto')))
 #
 # caffe.set_device(0)
 # caffe.set_mode_gpu()

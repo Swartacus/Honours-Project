@@ -1,0 +1,444 @@
+I1017 20:32:40.849756  7068 caffe.cpp:217] Using GPUs 0
+I1017 20:32:40.852303  7068 caffe.cpp:222] GPU 0: GeForce GTX 960
+I1017 20:32:40.967746  7068 solver.cpp:48] Initializing solver from parameters: 
+train_net: "/home/adam/Honours/Honours-Project/cifar-10_pooling/stochastic/relu/poolcnn_relu_train.prototxt"
+test_net: "/home/adam/Honours/Honours-Project/cifar-10_pooling/stochastic/relu/poolcnn_relu_test.prototxt"
+test_iter: 100
+test_interval: 150
+base_lr: 0.0001
+display: 50
+max_iter: 25000
+lr_policy: "step"
+gamma: 0.1
+momentum: 0.9
+weight_decay: 0.0005
+stepsize: 5000
+snapshot: 5000
+snapshot_prefix: "cifar-10_relu_Nesterov"
+solver_mode: GPU
+device_id: 0
+train_state {
+  level: 0
+  stage: ""
+}
+type: "Nesterov"
+I1017 20:32:40.967861  7068 solver.cpp:81] Creating training net from train_net file: /home/adam/Honours/Honours-Project/cifar-10_pooling/stochastic/relu/poolcnn_relu_train.prototxt
+I1017 20:32:40.968214  7068 net.cpp:58] Initializing net from parameters: 
+state {
+  phase: TRAIN
+  level: 0
+  stage: ""
+}
+layer {
+  name: "data"
+  type: "Data"
+  top: "data"
+  top: "label"
+  data_param {
+    source: "../../../../data/cifar-10/cifar10_train_lmdb"
+    batch_size: 64
+    backend: LMDB
+  }
+}
+layer {
+  name: "conv1"
+  type: "Convolution"
+  bottom: "data"
+  top: "conv1"
+  convolution_param {
+    num_output: 192
+    kernel_size: 5
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "pool1"
+  type: "Pooling"
+  bottom: "conv1"
+  top: "pool1"
+  pooling_param {
+    pool: STOCHASTIC
+    kernel_size: 2
+    stride: 2
+  }
+}
+layer {
+  name: "drop1"
+  type: "Dropout"
+  bottom: "pool1"
+  top: "drop1"
+  dropout_param {
+    dropout_ratio: 0
+  }
+}
+layer {
+  name: "relu1"
+  type: "ReLU"
+  bottom: "drop1"
+  top: "relu1"
+}
+layer {
+  name: "conv2"
+  type: "Convolution"
+  bottom: "relu1"
+  top: "conv2"
+  convolution_param {
+    num_output: 192
+    kernel_size: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "conv3"
+  type: "Convolution"
+  bottom: "conv2"
+  top: "conv3"
+  convolution_param {
+    num_output: 240
+    kernel_size: 3
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "pool2"
+  type: "Pooling"
+  bottom: "conv3"
+  top: "pool2"
+  pooling_param {
+    pool: STOCHASTIC
+    kernel_size: 2
+    stride: 2
+  }
+}
+layer {
+  name: "drop2"
+  type: "Dropout"
+  bottom: "pool2"
+  top: "drop2"
+  dropout_param {
+    dropout_ratio: 0.1
+  }
+}
+layer {
+  name: "relu2"
+  type: "ReLU"
+  bottom: "drop2"
+  top: "relu2"
+}
+layer {
+  name: "conv4"
+  type: "Convolution"
+  bottom: "relu2"
+  top: "conv4"
+  convolution_param {
+    num_output: 240
+    kernel_size: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "conv5"
+  type: "Convolution"
+  bottom: "conv4"
+  top: "conv5"
+  convolution_param {
+    num_output: 260
+    kernel_size: 2
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "pool3"
+  type: "Pooling"
+  bottom: "conv5"
+  top: "pool3"
+  pooling_param {
+    pool: STOCHASTIC
+    kernel_size: 2
+    stride: 2
+  }
+}
+layer {
+  name: "drop3"
+  type: "Dropout"
+  bottom: "pool3"
+  top: "drop3"
+  dropout_param {
+    dropout_ratio: 0.2
+  }
+}
+layer {
+  name: "relu3"
+  type: "ReLU"
+  bottom: "drop3"
+  top: "relu3"
+}
+layer {
+  name: "conv6"
+  type: "Convolution"
+  bottom: "relu3"
+  top: "conv6"
+  convolution_param {
+    num_output: 260
+    kernel_size: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "conv7"
+  type: "Convolution"
+  bottom: "conv6"
+  top: "conv7"
+  convolution_param {
+    num_output: 280
+    kernel_size: 2
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "pool4"
+  type: "Pooling"
+  bottom: "conv7"
+  top: "pool4"
+  pooling_param {
+    pool: STOCHASTIC
+    kernel_size: 2
+    stride: 2
+  }
+}
+layer {
+  name: "drop4"
+  type: "Dropout"
+  bottom: "pool4"
+  top: "drop4"
+  dropout_param {
+    dropout_ratio: 0.3
+  }
+}
+layer {
+  name: "relu4"
+  type: "ReLU"
+  bottom: "drop4"
+  top: "relu4"
+}
+layer {
+  name: "conv8"
+  type: "Convolution"
+  bottom: "relu4"
+  top: "conv8"
+  convolution_param {
+    num_output: 280
+    kernel_size: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "pool5"
+  type: "Pooling"
+  bottom: "conv8"
+  top: "pool5"
+  pooling_param {
+    pool: STOCHASTIC
+    kernel_size: 2
+    stride: 2
+  }
+}
+layer {
+  name: "drop5"
+  type: "Dropout"
+  bottom: "pool5"
+  top: "drop5"
+  dropout_param {
+    dropout_ratio: 0.4
+  }
+}
+layer {
+  name: "relu5"
+  type: "ReLU"
+  bottom: "drop5"
+  top: "relu5"
+}
+layer {
+  name: "conv10"
+  type: "Convolution"
+  bottom: "relu5"
+  top: "conv10"
+  convolution_param {
+    num_output: 300
+    kernel_size: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "pool6"
+  type: "Pooling"
+  bottom: "conv10"
+  top: "pool6"
+  pooling_param {
+    pool: STOCHASTIC
+    kernel_size: 2
+    stride: 2
+  }
+}
+layer {
+  name: "drop6"
+  type: "Dropout"
+  bottom: "pool6"
+  top: "drop6"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "relu6"
+  type: "ReLU"
+  bottom: "drop6"
+  top: "relu6"
+}
+layer {
+  name: "conv11"
+  type: "Convolution"
+  bottom: "relu6"
+  top: "conv11"
+  convolution_param {
+    num_output: 100
+    kernel_size: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "pool7"
+  type: "Pooling"
+  bottom: "conv11"
+  top: "pool7"
+  pooling_param {
+    pool: STOCHASTIC
+    kernel_size: 2
+    stride: 2
+  }
+}
+layer {
+  name: "drop7"
+  type: "Dropout"
+  bottom: "pool7"
+  top: "drop7"
+  dropout_param {
+    dropout_ratio: 0
+  }
+}
+layer {
+  name: "relu7"
+  type: "ReLU"
+  bottom: "drop7"
+  top: "relu7"
+}
+layer {
+  name: "pool"
+  type: "Pooling"
+  bottom: "relu7"
+  top: "pool"
+  pooling_param {
+    pool: STOCHASTIC
+    global_pooling: true
+  }
+}
+layer {
+  name: "flatten"
+  type: "Flatten"
+  bottom: "pool"
+  top: "flatten"
+}
+layer {
+  name: "score"
+  type: "InnerProduct"
+  bottom: "flatten"
+  top: "score"
+  inner_product_param {
+    num_output: 10
+    weight_filler {
+      type: "gaussian"
+    }
+  }
+}
+layer {
+  name: "accuracy"
+  type: "Accuracy"
+  bottom: "score"
+  bottom: "label"
+  top: "accuracy"
+}
+layer {
+  name: "loss"
+  type: "SoftmaxWithLoss"
+  bottom: "score"
+  bottom: "label"
+  top: "loss"
+}
+I1017 20:32:40.968317  7068 layer_factory.hpp:77] Creating layer data
+I1017 20:32:40.968693  7068 net.cpp:100] Creating Layer data
+I1017 20:32:40.968699  7068 net.cpp:408] data -> data
+I1017 20:32:40.968713  7068 net.cpp:408] data -> label
+I1017 20:32:40.969297  7073 db_lmdb.cpp:35] Opened lmdb ../../../../data/cifar-10/cifar10_train_lmdb
+I1017 20:32:40.974704  7068 data_layer.cpp:41] output data size: 64,3,32,32
+I1017 20:32:40.976054  7068 net.cpp:150] Setting up data
+I1017 20:32:40.976066  7068 net.cpp:157] Top shape: 64 3 32 32 (196608)
+I1017 20:32:40.976070  7068 net.cpp:157] Top shape: 64 (64)
+I1017 20:32:40.976073  7068 net.cpp:165] Memory required for data: 786688
+I1017 20:32:40.976080  7068 layer_factory.hpp:77] Creating layer label_data_1_split
+I1017 20:32:40.976091  7068 net.cpp:100] Creating Layer label_data_1_split
+I1017 20:32:40.976096  7068 net.cpp:434] label_data_1_split <- label
+I1017 20:32:40.976107  7068 net.cpp:408] label_data_1_split -> label_data_1_split_0
+I1017 20:32:40.976116  7068 net.cpp:408] label_data_1_split -> label_data_1_split_1
+I1017 20:32:40.976141  7068 net.cpp:150] Setting up label_data_1_split
+I1017 20:32:40.976145  7068 net.cpp:157] Top shape: 64 (64)
+I1017 20:32:40.976147  7068 net.cpp:157] Top shape: 64 (64)
+I1017 20:32:40.976150  7068 net.cpp:165] Memory required for data: 787200
+I1017 20:32:40.976150  7068 layer_factory.hpp:77] Creating layer conv1
+I1017 20:32:40.976162  7068 net.cpp:100] Creating Layer conv1
+I1017 20:32:40.976164  7068 net.cpp:434] conv1 <- data
+I1017 20:32:40.976169  7068 net.cpp:408] conv1 -> conv1
+I1017 20:32:41.095096  7068 net.cpp:150] Setting up conv1
+I1017 20:32:41.095124  7068 net.cpp:157] Top shape: 64 192 28 28 (9633792)
+I1017 20:32:41.095125  7068 net.cpp:165] Memory required for data: 39322368
+I1017 20:32:41.095144  7068 layer_factory.hpp:77] Creating layer pool1
+I1017 20:32:41.095152  7068 net.cpp:100] Creating Layer pool1
+I1017 20:32:41.095156  7068 net.cpp:434] pool1 <- conv1
+I1017 20:32:41.095161  7068 net.cpp:408] pool1 -> pool1
+F1017 20:32:41.095278  7068 cudnn.hpp:128] Unknown pooling method.
+*** Check failure stack trace: ***
+    @     0x7fc3016615cd  google::LogMessage::Fail()
+    @     0x7fc301663433  google::LogMessage::SendToLog()
+    @     0x7fc30166115b  google::LogMessage::Flush()
+    @     0x7fc301663e1e  google::LogMessageFatal::~LogMessageFatal()
+    @     0x7fc301d8ff2d  caffe::CuDNNPoolingLayer<>::LayerSetUp()
+    @     0x7fc301cd89b2  caffe::Net<>::Init()
+    @     0x7fc301cda241  caffe::Net<>::Net()
+    @     0x7fc301e34d8a  caffe::Solver<>::InitTrainNet()
+    @     0x7fc301e360f7  caffe::Solver<>::Init()
+    @     0x7fc301e3649a  caffe::Solver<>::Solver()
+    @     0x7fc301e20933  caffe::Creator_NesterovSolver<>()
+    @           0x40afb9  train()
+    @           0x4077c8  main
+    @     0x7fc2ffdf8830  __libc_start_main
+    @           0x408099  _start
+    @              (nil)  (unknown)
