@@ -15,7 +15,7 @@ def allcnn_relu(lmdb, batch_size):
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, transform_param=dict(scale=1./255), ntop=2)
 
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
@@ -62,7 +62,7 @@ def allcnn_elu(lmdb, batch_size):
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, transform_param=dict(scale=1./255), ntop=2)
 
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
@@ -108,7 +108,7 @@ def allcnn_leakyrelu(lmdb, batch_size):
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, transform_param=dict(scale=1./255), source=lmdb, ntop=2)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
     n.relu1 = L.ReLU(n.conv1, negative_slope = 0.01, in_place=True)
@@ -153,7 +153,7 @@ def allcnn_sigmoid(lmdb, batch_size):
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, transform_param=dict(scale=1./255), source=lmdb, ntop=2)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
     n.sig1 = L.Sigmoid(n.conv1, in_place=True)
@@ -198,7 +198,7 @@ def allcnn_tanh(lmdb, batch_size):
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, transform_param=dict(scale=1./255), source=lmdb, ntop=2)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
     n.tanh1 = L.TanH(n.conv1, in_place=True)
@@ -243,7 +243,7 @@ def allcnn_absval(lmdb, batch_size):
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, transform_param=dict(scale=1./255), source=lmdb, ntop=2)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
     n.absval1 = L.AbsVal(n.conv1, in_place=True)
@@ -288,7 +288,7 @@ def allcnn_power(lmdb, batch_size):
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, transform_param=dict(scale=1./255), source=lmdb, ntop=2)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
     n.power1 = L.Power(n.conv1, in_place=True)
@@ -333,7 +333,7 @@ def allcnn_bnll(lmdb, batch_size):
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, transform_param=dict(scale=1./255), source=lmdb, ntop=2)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=3, num_output=96, weight_filler=dict(type='xavier'))
     n.bnll1 = L.BNLL(n.conv1, in_place=True)

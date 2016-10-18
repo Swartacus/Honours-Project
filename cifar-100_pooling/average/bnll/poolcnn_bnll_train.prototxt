@@ -1,0 +1,391 @@
+layer {
+  name: "data"
+  type: "HDF5Data"
+  top: "data"
+  top: "label_coarse"
+  top: "label_fine"
+  hdf5_data_param {
+    source: "../../../../data/cifar-100/cifar_100_caffe_hdf5/train.txt"
+    batch_size: 64
+  }
+}
+layer {
+  name: "conv1"
+  type: "Convolution"
+  bottom: "data"
+  top: "conv1"
+  convolution_param {
+    num_output: 192
+    kernel_size: 5
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "pool1"
+  type: "Pooling"
+  bottom: "conv1"
+  top: "pool1"
+  pooling_param {
+    pool: AVE
+    kernel_size: 2
+    stride: 2
+  }
+}
+layer {
+  name: "drop1"
+  type: "Dropout"
+  bottom: "pool1"
+  top: "drop1"
+  dropout_param {
+    dropout_ratio: 0.0
+  }
+}
+layer {
+  name: "bnll1"
+  type: "BNLL"
+  bottom: "drop1"
+  top: "bnll1"
+}
+layer {
+  name: "conv2"
+  type: "Convolution"
+  bottom: "bnll1"
+  top: "conv2"
+  convolution_param {
+    num_output: 192
+    kernel_size: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "conv3"
+  type: "Convolution"
+  bottom: "conv2"
+  top: "conv3"
+  convolution_param {
+    num_output: 240
+    kernel_size: 3
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "pool2"
+  type: "Pooling"
+  bottom: "conv3"
+  top: "pool2"
+  pooling_param {
+    pool: AVE
+    kernel_size: 2
+    stride: 2
+  }
+}
+layer {
+  name: "drop2"
+  type: "Dropout"
+  bottom: "pool2"
+  top: "drop2"
+  dropout_param {
+    dropout_ratio: 0.1
+  }
+}
+layer {
+  name: "bnll2"
+  type: "BNLL"
+  bottom: "drop2"
+  top: "bnll2"
+}
+layer {
+  name: "conv4"
+  type: "Convolution"
+  bottom: "bnll2"
+  top: "conv4"
+  convolution_param {
+    num_output: 240
+    kernel_size: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "conv5"
+  type: "Convolution"
+  bottom: "conv4"
+  top: "conv5"
+  convolution_param {
+    num_output: 260
+    kernel_size: 2
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "pool3"
+  type: "Pooling"
+  bottom: "conv5"
+  top: "pool3"
+  pooling_param {
+    pool: AVE
+    kernel_size: 2
+    stride: 2
+  }
+}
+layer {
+  name: "drop3"
+  type: "Dropout"
+  bottom: "pool3"
+  top: "drop3"
+  dropout_param {
+    dropout_ratio: 0.2
+  }
+}
+layer {
+  name: "bnll3"
+  type: "BNLL"
+  bottom: "drop3"
+  top: "bnll3"
+}
+layer {
+  name: "conv6"
+  type: "Convolution"
+  bottom: "bnll3"
+  top: "conv6"
+  convolution_param {
+    num_output: 260
+    kernel_size: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "conv7"
+  type: "Convolution"
+  bottom: "conv6"
+  top: "conv7"
+  convolution_param {
+    num_output: 280
+    kernel_size: 2
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "pool4"
+  type: "Pooling"
+  bottom: "conv7"
+  top: "pool4"
+  pooling_param {
+    pool: AVE
+    kernel_size: 2
+    stride: 2
+  }
+}
+layer {
+  name: "drop4"
+  type: "Dropout"
+  bottom: "pool4"
+  top: "drop4"
+  dropout_param {
+    dropout_ratio: 0.3
+  }
+}
+layer {
+  name: "bnll4"
+  type: "BNLL"
+  bottom: "drop4"
+  top: "bnll4"
+}
+layer {
+  name: "conv8"
+  type: "Convolution"
+  bottom: "bnll4"
+  top: "conv8"
+  convolution_param {
+    num_output: 280
+    kernel_size: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "pool5"
+  type: "Pooling"
+  bottom: "conv8"
+  top: "pool5"
+  pooling_param {
+    pool: AVE
+    kernel_size: 2
+    stride: 2
+  }
+}
+layer {
+  name: "drop5"
+  type: "Dropout"
+  bottom: "pool5"
+  top: "drop5"
+  dropout_param {
+    dropout_ratio: 0.4
+  }
+}
+layer {
+  name: "bnll5"
+  type: "BNLL"
+  bottom: "drop5"
+  top: "bnll5"
+}
+layer {
+  name: "conv10"
+  type: "Convolution"
+  bottom: "bnll5"
+  top: "conv10"
+  convolution_param {
+    num_output: 300
+    kernel_size: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "pool6"
+  type: "Pooling"
+  bottom: "conv10"
+  top: "pool6"
+  pooling_param {
+    pool: AVE
+    kernel_size: 2
+    stride: 2
+  }
+}
+layer {
+  name: "drop6"
+  type: "Dropout"
+  bottom: "pool6"
+  top: "drop6"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "bnll6"
+  type: "BNLL"
+  bottom: "drop6"
+  top: "bnll6"
+}
+layer {
+  name: "conv11"
+  type: "Convolution"
+  bottom: "bnll6"
+  top: "conv11"
+  convolution_param {
+    num_output: 100
+    kernel_size: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "pool7"
+  type: "Pooling"
+  bottom: "conv11"
+  top: "pool7"
+  pooling_param {
+    pool: AVE
+    kernel_size: 2
+    stride: 2
+  }
+}
+layer {
+  name: "drop7"
+  type: "Dropout"
+  bottom: "pool7"
+  top: "drop7"
+  dropout_param {
+    dropout_ratio: 0.0
+  }
+}
+layer {
+  name: "bnll7"
+  type: "BNLL"
+  bottom: "drop7"
+  top: "bnll7"
+}
+layer {
+  name: "pool"
+  type: "Pooling"
+  bottom: "bnll7"
+  top: "pool"
+  pooling_param {
+    pool: AVE
+    global_pooling: true
+  }
+}
+layer {
+  name: "flatten"
+  type: "Flatten"
+  bottom: "pool"
+  top: "flatten"
+}
+layer {
+  name: "ip_c"
+  type: "InnerProduct"
+  bottom: "flatten"
+  top: "ip_c"
+  inner_product_param {
+    num_output: 20
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "accuracy_f"
+  type: "Accuracy"
+  bottom: "ip_c"
+  bottom: "label_coarse"
+  top: "accuracy_f"
+}
+layer {
+  name: "loss_c"
+  type: "SoftmaxWithLoss"
+  bottom: "ip_c"
+  bottom: "label_coarse"
+  top: "loss_c"
+}
+layer {
+  name: "ip_f"
+  type: "InnerProduct"
+  bottom: "flatten"
+  top: "ip_f"
+  inner_product_param {
+    num_output: 100
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "accuracy"
+  type: "Accuracy"
+  bottom: "ip_f"
+  bottom: "label_fine"
+  top: "accuracy"
+}
+layer {
+  name: "loss_f"
+  type: "SoftmaxWithLoss"
+  bottom: "ip_f"
+  bottom: "label_fine"
+  top: "loss_f"
+}

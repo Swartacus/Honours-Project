@@ -14,7 +14,7 @@ sys.path.insert(0, caffe_root + 'python')
 import caffe
 from caffe import layers as L, params as P
 
-def cnn_elu(lmdb, batch_size, mean):
+def cnn_elu(lmdb, batch_size):
     '''
     Creates a CNN that uses ELUs
     '''
@@ -69,7 +69,7 @@ def cnn_elu(lmdb, batch_size, mean):
 
     return n.to_proto()
 
-def cnn_relu(lmdb, batch_size, mean):
+def cnn_relu(lmdb, batch_size):
     '''
     Creates a CNN that uses ReLUs
     '''
@@ -124,7 +124,7 @@ def cnn_relu(lmdb, batch_size, mean):
 
     return n.to_proto()
 
-def cnn_leakyrelu(lmdb, batch_size, mean):
+def cnn_leakyrelu(lmdb, batch_size):
     '''
     Creates a CNN that uses LeakyReLUs
     '''
@@ -179,7 +179,7 @@ def cnn_leakyrelu(lmdb, batch_size, mean):
 
     return n.to_proto()
 
-def cnn_sig(lmdb, batch_size, mean):
+def cnn_sig(lmdb, batch_size):
     '''
     Creates a CNN that uses Sigmoids
     '''
@@ -235,7 +235,7 @@ def cnn_sig(lmdb, batch_size, mean):
     return n.to_proto()
 
 
-def cnn_tanh(lmdb, batch_size, mean):
+def cnn_tanh(lmdb, batch_size):
     '''
     Creates a CNN that uses TanH activations
     '''
@@ -290,7 +290,7 @@ def cnn_tanh(lmdb, batch_size, mean):
 
     return n.to_proto()
 
-def cnn_absval(lmdb, batch_size, mean):
+def cnn_absval(lmdb, batch_size):
     '''
     Creates a CNN that uses Absolute Value activations
     '''
@@ -346,7 +346,7 @@ def cnn_absval(lmdb, batch_size, mean):
     return n.to_proto()
 
 
-def cnn_power(lmdb, batch_size, mean):
+def cnn_power(lmdb, batch_size):
     '''
     Creates a CNN that uses Powers
     '''
@@ -401,7 +401,7 @@ def cnn_power(lmdb, batch_size, mean):
 
     return n.to_proto()
 
-def cnn_bnll(lmdb, batch_size, mean):
+def cnn_bnll(lmdb, batch_size):
     '''
     Creates a CNN that uses BNLL activations
     '''
