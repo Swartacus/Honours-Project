@@ -19,7 +19,7 @@ def cnn_elu(lmdb, batch_size):
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, transform_param=dict(scale=1./255), source=lmdb, ntop=2)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=5, num_output=192, weight_filler=dict(type='xavier'))
     n.pool1 = L.Pooling(n.conv1, kernel_size=2, stride=2, pool=P.Pooling.MAX)
@@ -74,7 +74,7 @@ def cnn_relu(lmdb, batch_size):
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, transform_param=dict(scale=1./255), source=lmdb, ntop=2)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=5, num_output=192, weight_filler=dict(type='xavier'))
     n.pool1 = L.Pooling(n.conv1, kernel_size=2, stride=2, pool=P.Pooling.MAX)
@@ -129,7 +129,7 @@ def cnn_leakyrelu(lmdb, batch_size):
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, transform_param=dict(scale=1./255), source=lmdb, ntop=2)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=5, num_output=192, weight_filler=dict(type='xavier'))
     n.pool1 = L.Pooling(n.conv1, kernel_size=2, stride=2, pool=P.Pooling.MAX)
@@ -184,7 +184,7 @@ def cnn_sig(lmdb, batch_size):
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, transform_param=dict(scale=1./255), source=lmdb, ntop=2)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=5, num_output=192, weight_filler=dict(type='xavier'))
     n.pool1 = L.Pooling(n.conv1, kernel_size=2, stride=2, pool=P.Pooling.MAX)
@@ -240,7 +240,7 @@ def cnn_tanh(lmdb, batch_size):
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, transform_param=dict(scale=1./255), source=lmdb, ntop=2)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=5, num_output=192, weight_filler=dict(type='xavier'))
     n.pool1 = L.Pooling(n.conv1, kernel_size=2, stride=2, pool=P.Pooling.MAX)
@@ -295,7 +295,7 @@ def cnn_absval(lmdb, batch_size):
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, transform_param=dict(scale=1./255), source=lmdb, ntop=2)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=5, num_output=192, weight_filler=dict(type='xavier'))
     n.pool1 = L.Pooling(n.conv1, kernel_size=2, stride=2, pool=P.Pooling.MAX)
@@ -351,7 +351,7 @@ def cnn_power(lmdb, batch_size):
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, transform_param=dict(scale=1./255), source=lmdb, ntop=2)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=5, num_output=192, weight_filler=dict(type='xavier'))
     n.pool1 = L.Pooling(n.conv1, kernel_size=2, stride=2, pool=P.Pooling.MAX)
@@ -406,7 +406,7 @@ def cnn_bnll(lmdb, batch_size):
     '''
     n = caffe.NetSpec()
 
-    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, source=lmdb, ntop=2)
+    n.data, n.label = L.Data(batch_size=batch_size, backend=P.Data.LMDB, transform_param=dict(scale=1./255), source=lmdb, ntop=2)
     # first stack
     n.conv1 = L.Convolution(n.data, kernel_size=5, num_output=192, weight_filler=dict(type='xavier'))
     n.pool1 = L.Pooling(n.conv1, kernel_size=2, stride=2, pool=P.Pooling.MAX)
