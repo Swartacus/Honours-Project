@@ -187,7 +187,7 @@ for p in pools:
             s.test_interval = 150
             del s.test_iter[:]
             s.test_iter.append(100)
-            s.max_iter = 15000
+            s.max_iter = 25000
             s.base_lr = 0.0001
             if (s.type != 'AdaGrad') and (s.type != 'Adam') and (s.type != 'RMSProp'):
                 s.momentum = 0.9
