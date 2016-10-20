@@ -8,5 +8,5 @@ $TOOLS/caffe train \
   -solver allcnn_relu_solver_SGD.prototxt 2>&1 | tee ../log/allcnn_relu_SGD.log
 
 #visualise
-python ~/bin/caffe-master/tools/extra/parse_log.py ../log/allcnn_relu_SGD.log .
+#python ~/bin/caffe-master/tools/extra/parse_log.py ../log/allcnn_relu_SGD.log .
 #gnuplot -persist gnuplot_commands
