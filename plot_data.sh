@@ -10,7 +10,7 @@ gnuplot cifar-10_allcnn/elu/gnuplot_commands
 
 # draw all-cnn cifar-10 leakyrelu
 python ~/bin/caffe-master/python/draw_net.py cifar-10_allcnn/leakyrelu/allcnn_leakyrelu_train.prototxt cifar-10_allcnn_leakyrelu.png
-gnuplot cifar-10_allcnn/relu/gnuplot_commands
+gnuplot cifar-10_allcnn/leakyrelu/gnuplot_commands
 
 # draw all-cnn cifar-100 relu
 python ~/bin/caffe-master/python/draw_net.py cifar-100_allcnn/relu/allcnn_relu_train.prototxt cifar-100_allcnn_relu.png
