@@ -22,7 +22,7 @@ layer {
 #  }
   data_param {
     source: "../../data/imagenet/ilsvrc12_train_lmdb"
-    batch_size: 10
+    batch_size: 25
     backend: LMDB
   }
 }
@@ -49,7 +49,7 @@ layer {
 #  }
   data_param {
     source: "../../data/imagenet/ilsvrc12_val_lmdb"
-    batch_size: 10
+    batch_size: 25
     backend: LMDB
   }
 }
@@ -426,7 +426,7 @@ layer {
   }
   convolution_param {
     num_output: 384
-    kernel_size: 2
+    kernel_size: 3
     weight_filler {
       type: "xavier"
     }
@@ -457,7 +457,7 @@ layer {
   }
   convolution_param {
     num_output: 384
-    kernel_size: 2
+    kernel_size: 3
     weight_filler {
       type: "xavier"
     }
@@ -488,7 +488,7 @@ layer {
   }
   convolution_param {
     num_output: 384
-    kernel_size: 2
+    kernel_size: 3
     stride: 2
     weight_filler {
       type: "xavier"
@@ -524,10 +524,10 @@ layer {
   }
 }
 layer {
-  name: "fc1"
-  type: "InnerProduct"
+  name: "conv9"
+  type: "Convolution"
   bottom: "norm4"
-  top: "fc1"
+  top: "conv9"
   param {
     lr_mult: 1
     decay_mult: 1
@@ -536,11 +536,11 @@ layer {
     lr_mult: 2
     decay_mult: 0
   }
-  inner_product_param {
+  convolution_param {
     num_output: 1024
+    kernel_size: 3
     weight_filler {
-      type: "gaussian"
-      std: 0.005
+      type: "xavier"
     }
     bias_filler {
       type: "constant"
@@ -551,23 +551,14 @@ layer {
 layer {
   name: "elu9"
   type: "ELU"
-  bottom: "fc1"
-  top: "fc1"
+  bottom: "conv9"
+  top: "conv9"
 }
 layer {
-  name: "drop1"
-  type: "Dropout"
-  bottom: "fc1"
-  top: "fc1"
-  dropout_param {
-    dropout_ratio: 0.5
-  }
-}
-layer {
-  name: "fc2"
-  type: "InnerProduct"
-  bottom: "fc1"
-  top: "fc2"
+  name: "conv10"
+  type: "Convolution"
+  bottom: "conv9"
+  top: "conv10"
   param {
     lr_mult: 1
     decay_mult: 1
@@ -576,11 +567,11 @@ layer {
     lr_mult: 2
     decay_mult: 0
   }
-  inner_product_param {
+  convolution_param {
     num_output: 1024
+    kernel_size: 1
     weight_filler {
-      type: "gaussian"
-      std: 0.005
+      type: "xavier"
     }
     bias_filler {
       type: "constant"
@@ -591,23 +582,14 @@ layer {
 layer {
   name: "elu10"
   type: "ELU"
-  bottom: "fc2"
-  top: "fc2"
+  bottom: "conv10"
+  top: "conv10"
 }
 layer {
-  name: "drop2"
-  type: "Dropout"
-  bottom: "fc2"
-  top: "fc2"
-  dropout_param {
-    dropout_ratio: 0.5
-  }
-}
-layer {
-  name: "fc3"
-  type: "InnerProduct"
-  bottom: "fc2"
-  top: "fc3"
+  name: "conv11"
+  type: "Convolution"
+  bottom: "conv10"
+  top: "conv11"
   param {
     lr_mult: 1
     decay_mult: 1
@@ -616,29 +598,45 @@ layer {
     lr_mult: 2
     decay_mult: 0
   }
-  inner_product_param {
+  convolution_param {
     num_output: 1000
+    kernel_size: 1
     weight_filler {
-      type: "gaussian"
-      std: 0.01
+      type: "xavier"
     }
     bias_filler {
       type: "constant"
-      value: 0
+      value: 1
     }
+  }
+}
+layer {
+  name: "elu11"
+  type: "ELU"
+  bottom: "conv11"
+  top: "conv11"
+}
+layer {
+  name: "pool"
+  type: "Pooling"
+  bottom: "conv11"
+  top: "pool"
+  pooling_param {
+    pool: AVE
+    global_pooling: true
   }
 }
 layer {
   name: "accuracy"
   type: "Accuracy"
-  bottom: "fc3"
+  bottom: "pool"
   bottom: "label"
   top: "accuracy"
 }
 layer {
   name: "loss"
   type: "SoftmaxWithLoss"
-  bottom: "fc3"
+  bottom: "pool"
   bottom: "label"
   top: "loss"
 }
